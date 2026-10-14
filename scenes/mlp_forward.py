@@ -1,27 +1,52 @@
-"""Forward pass of a small neural network, as an explanatory video (work in progress: beats 1-2 of 6).
+"""Forward pass of a small neural network, as an explanatory video (work in progress: beats 1-4 of 6).
 
     uv run manim -ql scenes/mlp_forward.py MlpForwardPass          # draft, 480p15
+    uv run manim -qm scenes/mlp_forward.py MlpForwardPass          # draft, 720p30 (easier to judge motion)
     uv run manim -ql -s scenes/mlp_forward.py NetworkReference     # every value of the trace, one still
     uv run python scenes/studio/inspect_video.py media/videos/mlp_forward/480p15/MlpForwardPass.mp4
 
+Render only some beats while working on them (PowerShell):
+    $env:BEATS = "zoom-neuron"; uv run manim -ql scenes/mlp_forward.py MlpForwardPass; Remove-Item Env:BEATS
+
 Numbers come from assets/mlp/forward_trace.json (regenerate with `uv run python -m compute.export`).
 Final delivery (only when requested):  uv run manim -r 1920,1080 --fps 30 scenes/mlp_forward.py MlpForwardPass
+
+The "KNOBS" below are safe to change: they only move, resize, retime or recolor things.
 """
 from pathlib import Path
 
+import numpy as np
 from manim import *
 
 from studio.beats import BeatScene
-from studio.network import CENTER_Y, NetworkDiagram
-from studio.theme import BG, FONT, MUTED, NEG, POS, TEXT, sign_color
+from studio.equations import morph, neuron_equations, rest_of, typst_number
+from studio.network import CENTER_Y, NODE_RADIUS, NetworkDiagram
+from studio.plots import ActivationPlot
+from studio.theme import BG, FOCUS, FONT, GOLD, MUTED, NEG, POS, TEXT, sign_color
 from studio.trace import ForwardTrace
 
 TRACE_PATH = Path(__file__).resolve().parent.parent / "assets" / "mlp" / "forward_trace.json"
 
-# Vertical positions of the text rows under the network.
+# ----------------------------------------------------------------------------------------------
+# KNOBS. Positions are in scene units: the screen is 14.22 wide and 8 high, (0, 0) is the center,
+# x grows to the right and y grows upward.
+# ----------------------------------------------------------------------------------------------
+
+# Rows of text under the network (y positions).
 CAPTION_Y, KEY_Y, FOOTER_Y = -2.55, -3.0, -3.56
-# The input numbers are the subject of beat 1, so they start large and shrink into the input nodes.
+
+# Beat 1: the input numbers start large and shrink into the input nodes.
 INPUT_VALUE_SCALE = 1.8
+
+# Beat 3: which neuron we explain, and how the camera frames it.
+FOCUS_LAYER, FOCUS_INDEX = 1, 0  # hidden layer 1, first neuron (named "OR" in the trace)
+ZOOM_CENTER = (-1.7, 0.2)  # where the camera looks
+ZOOM_WIDTH = 10.4  # how much of the scene fits across the screen; smaller = closer
+DIM_AMOUNT = 0.9  # how much the rest of the network fades while we look at one neuron (0 = not at all, 1 = gone)
+EQUATION_CENTER = (-1.7, -1.75)  # where the equation sits while the camera is zoomed
+EQUATION_PANEL = (9.8, 1.1)  # width and height of the dark strip behind the equation
+PLOT_CENTER = (1.1, 1.2)  # the tanh graph
+PLOT_PANEL = (4.7, 3.3)
 
 
 def footer() -> VGroup:
@@ -45,12 +70,19 @@ def encoding_key() -> VGroup:
     return key.arrange(RIGHT, buff=0.5).move_to([0, KEY_Y, 0])
 
 
+def backdrop(center, size) -> Rectangle:
+    """A dark panel that hides the dimmed network behind an equation or graph so it stays readable."""
+    return Rectangle(width=size[0], height=size[1], fill_color=BG, fill_opacity=0.95, stroke_width=0).move_to([center[0], center[1], 0])
+
+
 class MlpForwardPass(BeatScene):
     def construct(self):
         self.trace = ForwardTrace.load(TRACE_PATH)
         self.diagram = NetworkDiagram(self.trace)
         self.beat_question()
         self.beat_build()
+        self.beat_neuron()
+        self.beat_back_out()
 
     # Beat 1: the question. The input numbers appear exactly where the input nodes will be.
     def beat_question(self):
@@ -94,7 +126,96 @@ class MlpForwardPass(BeatScene):
             self.play(LaggedStart(*[GrowFromCenter(n.ring) for n in d.nodes[layer]], lag_ratio=0.2), FadeIn(d.layer_titles[layer]), run_time=0.6)
             self.play(LaggedStart(*[Create(e) for e in d.layer_edges(layer)], lag_ratio=0.1), run_time=1.0)
         self.play(*[FadeIn(label) for label in d.output_labels], run_time=0.6)
-        self.play(FadeIn(caption("Layers of simple units, joined by weighted connections")), FadeIn(encoding_key()), run_time=1.0)
+        self.build_notes = VGroup(caption("Layers of simple units, joined by weighted connections"), encoding_key())
+        self.play(FadeIn(self.build_notes), run_time=1.0)
+        self.wait(1.5)
+
+    # Beat 3: zoom into one neuron and follow its arithmetic: weights x inputs, plus bias, then tanh.
+    def beat_neuron(self):
+        self.beat("zoom-neuron")
+        d, trace = self.diagram, self.trace
+        node = d.nodes[FOCUS_LAYER][FOCUS_INDEX]
+        sources = d.nodes[FOCUS_LAYER - 1]
+        bias_value = trace.biases[FOCUS_LAYER - 1][FOCUS_INDEX]
+        z_value = trace.pre_activations[FOCUS_LAYER - 1][FOCUS_INDEX]
+        a_value = trace.activations[FOCUS_LAYER][FOCUS_INDEX]
+        eq = neuron_equations(trace, FOCUS_LAYER, FOCUS_INDEX)
+        terms = eq.term_labels  # ["w1", "x1", "w2", "x2", "b"]
+
+        # Everything that is not part of this neuron's story gets dimmed (and restored in the next beat).
+        keep = [*d.edges_into(FOCUS_LAYER, FOCUS_INDEX), node.ring, *[s.ring for s in sources], *[s.value for s in sources], *d.input_names]
+        is_kept = lambda m: any(m is k for k in keep)
+        self.background = VGroup(
+            *[e for e in d.edges.values() if not is_kept(e)],
+            *[n.ring for layer in d.nodes for n in layer if not is_kept(n.ring)],
+            *[label.text for label in d.output_labels],
+        )
+        self.background.save_state()
+        # The layer names would sit on top of the zoomed neuron, so they leave and come back.
+        self.play(self.zoom_to(ZOOM_CENTER, ZOOM_WIDTH), self.background.animate.fade(DIM_AMOUNT), FadeOut(self.build_notes), FadeOut(d.layer_titles), run_time=1.3)
+
+        # Mark the neuron and label what goes into it: one weight per line, plus the bias.
+        self.halo = Circle(radius=NODE_RADIUS + 0.14, color=FOCUS, stroke_width=4).move_to(node.ring)
+        weights = d.weight_labels(FOCUS_LAYER, FOCUS_INDEX)
+        bias = MathTypst("b = " + typst_number(bias_value), font_size=30, color=sign_color(bias_value)).next_to(node.ring, UP, buff=0.2)
+        self.play(Create(self.halo), run_time=0.5)
+        self.play(*[GrowFromCenter(w) for w in weights], FadeIn(bias), run_time=0.8)
+
+        # The rule, in symbols. Each term is boxed in gold together with the matching part of the diagram.
+        panel = backdrop(EQUATION_CENTER, EQUATION_PANEL)
+        for equation in (eq.symbolic, eq.substituted, eq.products, eq.result):
+            equation.move_to([EQUATION_CENTER[0], EQUATION_CENTER[1], 0])
+        self.play(FadeIn(panel), Write(eq.symbolic), run_time=1.0)
+        for k in range(eq.n_inputs):
+            term = VGroup(*eq.symbolic.select(terms[2 * k]), *eq.symbolic.select(terms[2 * k + 1]))
+            box = SurroundingRectangle(term, color=GOLD, buff=0.1)
+            self.play(Create(box), Indicate(weights[k], color=GOLD), Indicate(sources[k].value, color=GOLD), run_time=0.8)
+            self.play(FadeOut(box), run_time=0.2)
+        bias_box = SurroundingRectangle(eq.symbolic.select("b"), color=GOLD, buff=0.1)
+        self.play(Create(bias_box), Indicate(bias, color=GOLD), run_time=0.8)
+        self.play(FadeOut(bias_box), run_time=0.2)
+
+        # Replace each symbol by its real number, then multiply, then add up.
+        morph(self, [(eq.symbolic.select(t), eq.substituted.select(t)) for t in terms] + [(rest_of(eq.symbolic, terms), rest_of(eq.substituted, terms))], run_time=1.1)
+        self.wait(0.3)
+        products = [(VGroup(*eq.substituted.select(terms[2 * k]), *eq.substituted.select(terms[2 * k + 1])), eq.products.select(f"p{k + 1}")) for k in range(eq.n_inputs)]
+        morph(self, products + [(eq.substituted.select("b"), eq.products.select("b")), (rest_of(eq.substituted, terms), rest_of(eq.products, eq.product_labels))], run_time=1.1)
+        self.wait(0.3)
+        everything = VGroup(*[g for label in eq.product_labels for g in eq.products.select(label)])
+        morph(self, [(everything, eq.result.select("z")), (rest_of(eq.products, eq.product_labels), rest_of(eq.result, ["z"]))], run_time=1.0)
+        z_box = SurroundingRectangle(eq.result.select("z"), color=GOLD, buff=0.1)
+        self.play(Create(z_box), run_time=0.5)
+        self.wait(0.4)
+
+        # The activation function squashes z into a. The graph is the same tanh the model used.
+        plot = ActivationPlot().move_to([PLOT_CENTER[0] + 0.1, PLOT_CENTER[1] - 0.1, 0])
+        plot_panel = backdrop(PLOT_CENTER, PLOT_PANEL)
+        self.play(FadeIn(plot_panel), FadeIn(plot.axes), FadeIn(plot.ticks), FadeIn(plot.title), run_time=0.6)
+        self.play(Create(plot.curve), run_time=0.8)
+        z_dot = plot.point_on_axis(z_value)
+        z_label = plot.value_label(z_value, z_dot, DOWN)
+        self.play(TransformFromCopy(eq.result.select("z"), z_label), FadeIn(z_dot), run_time=0.8)
+        up, across = plot.guides(z_value)
+        a_dot = plot.point_on_curve(z_value)
+        a_label = plot.value_label(a_value, a_dot, DR)
+        self.play(Create(up), run_time=0.6)
+        self.play(FadeIn(a_dot), Create(across), FadeIn(a_label), run_time=0.6)
+        # The result flies back into the neuron, which lights up in its sign color.
+        self.play(TransformFromCopy(a_label, node.prepare_value()), node.ring_animation(), run_time=1.2)
+        self.wait(0.8)
+
+        self.neuron_overlays = Group(panel, eq.result, z_box, *weights, bias, plot_panel, plot, z_dot, z_label, up, across, a_dot, a_label)
+
+    # Beat 4: back to the whole network, with the first neuron lit.
+    def beat_back_out(self):
+        self.beat("back-out")
+        d, trace = self.diagram, self.trace
+        node = d.nodes[FOCUS_LAYER][FOCUS_INDEX]
+        self.play(FadeOut(self.neuron_overlays), FadeOut(self.halo), Restore(self.background), FadeIn(d.layer_titles), self.zoom_reset(), run_time=1.4)
+        role = trace.neuron_label(FOCUS_LAYER, FOCUS_INDEX)
+        if role:
+            self.play(FadeIn(Text(role, font=FONT, font_size=20, color=MUTED).next_to(node.ring, UP, buff=0.08)), run_time=0.5)
+        self.play(Write(caption("Every neuron repeats this recipe.")), run_time=1.0)
         self.wait(1.5)
 
 

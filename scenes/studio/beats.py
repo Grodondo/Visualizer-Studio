@@ -19,12 +19,14 @@ from __future__ import annotations
 import json
 import os
 
-from manim import MovingCameraScene
+from manim import MovingCameraScene, Restore, ThreeDScene
 
 from .theme import BG
 
 
-class BeatScene(MovingCameraScene):
+class BeatMixin:
+    """The beat bookkeeping, shared by the 2D and 3D scene classes below."""
+
     def setup(self) -> None:
         super().setup()
         self.camera.background_color = BG
@@ -57,8 +59,39 @@ class BeatScene(MovingCameraScene):
         if not self._beats:
             return
         self._close_current_beat()
-        video = self._get_manager().file_writer.movie_file_path
+        try:
+            video = self._get_manager().file_writer.movie_file_path
+        except AttributeError:
+            return  # a still-image render (-s) has no video file, so there is nothing to describe
         sidecar = video.with_name(video.stem + ".beats.json")
         sidecar.parent.mkdir(parents=True, exist_ok=True)
         beats = [{k: v for k, v in b.items() if k != "scene_start"} for b in self._beats]
         sidecar.write_text(json.dumps({"beats": beats}, indent=1), encoding="utf-8")
+
+
+class BeatScene(BeatMixin, MovingCameraScene):
+    """A 2D video made of beats, with camera zoom helpers."""
+
+    def setup(self) -> None:
+        super().setup()
+        self._camera_saved = False
+
+    def zoom_to(self, center, width: float):
+        """An animation that moves the camera to `center` so that `width` scene units fit across the screen.
+
+        Use it inside play():  self.play(self.zoom_to((-1.4, 0.2), 10), other_animation)
+        Smaller width = closer. The full view is 14.22 units wide.
+        """
+        if not self._camera_saved:
+            self.camera.frame.save_state()
+            self._camera_saved = True
+        x, y = center[0], center[1]
+        return self.camera.frame.animate.move_to([x, y, 0]).set(width=width)
+
+    def zoom_reset(self) -> Restore:
+        """An animation that returns the camera to the full view it started with."""
+        return Restore(self.camera.frame)
+
+
+class BeatScene3D(BeatMixin, ThreeDScene):
+    """A 3D video made of beats. Move the camera with self.move_camera(phi=..., theta=...)."""

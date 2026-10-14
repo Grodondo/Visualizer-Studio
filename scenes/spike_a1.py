@@ -12,6 +12,7 @@ Full spike (render a short video, then inspect it):
 from manim import *
 
 from studio.beats import BeatScene
+from studio.equations import morph, rest_of
 from studio.theme import BG, FOCUS, FONT, GOLD, MUTED, NEG, POS, TEXT, sign_color
 
 
@@ -41,22 +42,6 @@ class ProbeTextDecimal(Scene):
 
 def caption(text: str) -> Text:
     return Text(text, font=FONT, font_size=26, color=MUTED).to_edge(DOWN, buff=0.5)
-
-
-def rest_of(eq: MathTypst, labels: list[str]) -> VGroup:
-    """The glyphs of an equation that are not part of any named group (symbols like z, =, +)."""
-    grouped = [m for label in labels for m in eq.select(label).submobjects]
-    return VGroup(*[m for m in eq.submobjects if not any(m is g for g in grouped)])
-
-
-def morph(scene: Scene, pairs: list[tuple[VGroup, VGroup]], run_time: float = 1.0) -> None:
-    """Turn each source group into its target group.
-
-    ReplacementTransform (not Transform) matters here: afterwards the scene holds the *target's* glyphs,
-    so the next step can select() from the target again. Plain Transform leaves stray glyphs when a
-    group changes its glyph count (e.g. `b` becoming `- 2.0`).
-    """
-    scene.play(*[ReplacementTransform(src, dst) for src, dst in pairs], run_time=run_time)
 
 
 class A1Spike(BeatScene):

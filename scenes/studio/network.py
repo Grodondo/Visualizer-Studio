@@ -12,11 +12,13 @@ from __future__ import annotations
 import numpy as np
 from manim import (
     DOWN,
+    DR,
     LEFT,
     RIGHT,
     UP,
     Circle,
     DecimalNumber,
+    FadeIn,
     Line,
     MathTypst,
     Text,
@@ -72,6 +74,23 @@ class Node(VGroup):
         if self.value is not None:
             self.value.set_color(colour).set_opacity(1)
         return self
+
+    def _tint(self) -> float:
+        return TINT_MAX * min(1.0, abs(self.activation))
+
+    def ring_animation(self):
+        """Animate the ring from blank to its sign color and tint (use inside play())."""
+        colour = sign_color(self.activation)
+        return self.ring.animate.set_stroke(colour).set_fill(colour, opacity=self._tint())
+
+    def prepare_value(self) -> DecimalNumber:
+        """Color the number and make it visible, without adding it to the scene yet."""
+        self.value.set_color(sign_color(self.activation)).set_opacity(1)
+        return self.value
+
+    def reveal(self) -> list:
+        """Animations that light the node up: ring tint plus its number fading in."""
+        return [self.ring_animation(), FadeIn(self.prepare_value())] if self.value is not None else [self.ring_animation()]
 
 
 class OutputLabel(VGroup):
@@ -139,6 +158,18 @@ class NetworkDiagram(VGroup):
 
     def edges_into(self, layer: int, index: int) -> list[Line]:
         return [e for (l, to, _), e in self.edges.items() if l == layer and to == index]
+
+    def weight_labels(self, layer: int, index: int, font_size: float = 30) -> list[DecimalNumber]:
+        """The weight of every edge into one neuron, as a number sitting beside its line.
+
+        The first edge's label goes above its line and the others to the lower right, so labels never sit on a line.
+        """
+        labels = []
+        for k, edge in enumerate(self.edges_into(layer, index)):
+            number = DecimalNumber(edge.weight, num_decimal_places=DEFAULT_DECIMALS, mob_class=MathTypst, font_size=font_size, color=sign_color(edge.weight))
+            number.next_to(edge.point_from_proportion(0.5), UP if k == 0 else DR, buff=0.12)
+            labels.append(number)
+        return labels
 
     def show_all_activations(self) -> "NetworkDiagram":
         """Instantly show every node in its computed state (used for reference stills and tests)."""
