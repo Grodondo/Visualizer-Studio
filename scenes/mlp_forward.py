@@ -1,4 +1,4 @@
-"""Forward pass of a small neural network, as an explanatory video (work in progress: beats 1-4 of 6).
+"""Forward pass of a small neural network, as an explanatory video (all six beats).
 
     uv run manim -ql scenes/mlp_forward.py MlpForwardPass          # draft, 480p15
     uv run manim -qm scenes/mlp_forward.py MlpForwardPass          # draft, 720p30 (easier to judge motion)
@@ -23,7 +23,7 @@ from studio.equations import morph, neuron_equations, rest_of, typst_number
 from studio.network import CENTER_Y, NODE_RADIUS, NetworkDiagram
 from studio.plots import ActivationPlot
 from studio.theme import BG, FOCUS, FONT, GOLD, MUTED, NEG, POS, TEXT, sign_color
-from studio.trace import ForwardTrace
+from studio.trace import ForwardTrace, probability_typst
 
 TRACE_PATH = Path(__file__).resolve().parent.parent / "assets" / "mlp" / "forward_trace.json"
 
@@ -47,6 +47,30 @@ EQUATION_CENTER = (-1.7, -1.75)  # where the equation sits while the camera is z
 EQUATION_PANEL = (9.8, 1.1)  # width and height of the dark strip behind the equation
 PLOT_CENTER = (1.1, 1.2)  # the tanh graph
 PLOT_PANEL = (4.7, 3.3)
+
+# Beat 6: the recap card. Each row is (equation, explanation); x positions are the left edges of the two columns.
+RECAP_X = (-6.0, -1.6)
+RECAP_TOP_Y, RECAP_ROW_GAP = 1.5, 0.85
+RECAP_DIM = 0.88  # how much the network fades behind the recap card
+RECAP_CARD = ((0, 0.4), (14.6, 5.2))  # center and size of the dark card the recap sits on (wider than the screen)
+
+
+def recap_rows(trace: ForwardTrace) -> list[tuple[str | None, str]]:
+    """What the viewer should remember. The activation function's name comes from the trace."""
+    return [
+        ("z = sum_i w_i a_i + b", "weights \u00D7 inputs, plus a bias: the pre-activation z"),
+        (f"a = {trace.activation}(z)", "squash z into the activation a"),
+        ('p = "softmax"(z)', "at the end, scores become probabilities p"),
+        (None, "repeat for every neuron, layer by layer"),
+    ]
+
+
+def answer_caption(trace: ForwardTrace) -> VGroup:
+    """The network answers "different", p ≈ 0.99998: the class and its probability both come from the trace."""
+    return VGroup(
+        Text(f"The network answers \u201C{trace.prediction_label}\u201D,", font=FONT, font_size=28, color=TEXT),
+        MathTypst(probability_typst(trace.prediction_probability), font_size=32, color=TEXT),
+    ).arrange(RIGHT, buff=0.3).move_to([0, CAPTION_Y, 0])
 
 
 def footer() -> VGroup:
@@ -83,6 +107,8 @@ class MlpForwardPass(BeatScene):
         self.beat_build()
         self.beat_neuron()
         self.beat_back_out()
+        self.beat_forward_pass()
+        self.beat_result()
 
     # Beat 1: the question. The input numbers appear exactly where the input nodes will be.
     def beat_question(self):
@@ -215,7 +241,74 @@ class MlpForwardPass(BeatScene):
         role = trace.neuron_label(FOCUS_LAYER, FOCUS_INDEX)
         if role:
             self.play(FadeIn(Text(role, font=FONT, font_size=20, color=MUTED).next_to(node.ring, UP, buff=0.08)), run_time=0.5)
-        self.play(Write(caption("Every neuron repeats this recipe.")), run_time=1.0)
+        self.caption_now = caption("Every neuron repeats this recipe.")
+        self.play(Write(self.caption_now), run_time=1.0)
+        self.wait(1.5)
+
+    def swap_caption(self, text, run_time: float = 0.6):
+        """Replace the caption under the network: the old one fades out while the new one fades in."""
+        new = text if isinstance(text, Mobject) else caption(text)
+        old, self.caption_now = self.caption_now, new
+        self.play(*([FadeOut(old)] if old else []), FadeIn(new), run_time=run_time)
+
+
+    # Beat 5: the whole forward pass, layer by layer, with the same recipe the viewer just learned.
+    def beat_forward_pass(self):
+        self.beat("forward-pass")
+        self.swap_caption("Layer by layer, the signal flows forward.")
+        for layer in range(1, self.trace.last_layer):
+            # Layer 1 skips the neuron already explained in beat 3.
+            skip = {FOCUS_INDEX} if layer == FOCUS_LAYER else set()
+            self.compute_layer(layer, [i for i in range(self.trace.layer_sizes[layer]) if i not in skip])
+        out = self.trace.last_layer
+        self.output_z = self.compute_layer(out, list(range(self.trace.layer_sizes[out])))
+        self.swap_caption("Softmax turns the two scores into probabilities.")
+        self.wait(1.0)
+
+    def compute_layer(self, layer: int, indices: list[int]) -> list:
+        """One layer of the forward pass: signals flash along the edges, z appears, then the activation lights the node.
+
+        Returns the z labels still on screen (only the output layer's, which turn into probabilities in the next beat).
+        """
+        d, trace = self.diagram, self.trace
+        is_output = layer == trace.last_layer
+        self.play(LaggedStart(*[ShowPassingFlash(line, time_width=0.7) for i in indices for line in d.signal_lines(layer, i)], lag_ratio=0.1), run_time=1.0)
+        z_labels = [d.pre_activation_label(layer, i) for i in indices]
+        self.play(*[FadeIn(z) for z in z_labels], run_time=0.5)
+        if is_output:
+            self.play(*[d.nodes[layer][i].ring_animation() for i in indices], run_time=0.6)
+            return z_labels
+        self.play(*[TransformFromCopy(z, d.nodes[layer][i].prepare_value()) for z, i in zip(z_labels, indices)], *[d.nodes[layer][i].ring_animation() for i in indices], run_time=0.9)
+        self.play(*[FadeOut(z) for z in z_labels], run_time=0.3)
+        return []
+
+    # Beat 6: the answer, then a recap of the recipe.
+    def beat_result(self):
+        self.beat("result")
+        d, trace = self.diagram, self.trace
+        winner = d.output_labels[trace.prediction_index]
+        self.play(*[FadeOut(z) for z in self.output_z], *[label.prob.animate.set_opacity(1) for label in d.output_labels], run_time=0.8)
+        box = SurroundingRectangle(VGroup(winner.text, winner.prob), color=GOLD, buff=0.12)
+        answer = answer_caption(trace)
+        self.play(Create(box), run_time=0.5)
+        self.swap_caption(answer)
+        self.wait(1.2)
+
+        # Recap card: the network fades back and the equations of the recipe appear one by one.
+        network = VGroup(d, box)
+        rows = VGroup()
+        for k, (equation, words) in enumerate(recap_rows(trace)):
+            y = RECAP_TOP_Y - k * RECAP_ROW_GAP
+            row = VGroup()
+            if equation:
+                row.add(MathTypst(equation, font_size=38, color=TEXT).move_to([RECAP_X[0], y, 0], aligned_edge=LEFT))
+            row.add(Text(words, font=FONT, font_size=26, color=MUTED).move_to([RECAP_X[1], y, 0], aligned_edge=LEFT))
+            rows.add(row)
+        self.play(network.animate.fade(RECAP_DIM), FadeOut(self.caption_now), FadeIn(backdrop(*RECAP_CARD)), run_time=0.8)
+        self.play(LaggedStart(*[FadeIn(r, shift=RIGHT * 0.3) for r in rows], lag_ratio=0.45), run_time=2.4)
+        self.wait(1.6)
+        self.caption_now = caption("A neural network is arithmetic, repeated.")
+        self.play(Write(self.caption_now), run_time=1.0)
         self.wait(1.5)
 
 

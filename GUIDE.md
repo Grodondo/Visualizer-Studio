@@ -49,7 +49,7 @@ A scene only *shows* numbers it reads from the trace, so a video can never disag
 
 ## 3. The everyday loop: edit, render, look
 
-Render a quick draft (480p, 15 fps, about 15 seconds for the current four beats):
+Render a quick draft (480p, 15 fps, about 20 seconds for the six beats, which make a 55-second video):
 
 ```powershell
 uv run manim -ql scenes/mlp_forward.py MlpForwardPass
@@ -59,7 +59,8 @@ The video is written to `media\videos\mlp_forward\480p15\MlpForwardPass.mp4`.
 Open it in any player. (`-pql` also opens it automatically; that flag is the standard Manim one but I did not run it here.)
 Use `-qm` for 720p at 30 fps when you want to judge motion; it lands in `...\720p30\`.
 
-Work on one section only. Each `self.beat("name")` in the scene starts a section; list the ones you want:
+Work on one section only. Each `self.beat("name")` in the scene starts a section; list the ones you want
+(the neural-network video has `question`, `build-network`, `zoom-neuron`, `back-out`, `forward-pass` and `result`):
 
 ```powershell
 $env:BEATS = "zoom-neuron"

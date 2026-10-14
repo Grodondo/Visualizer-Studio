@@ -25,6 +25,7 @@ from manim import (
     VGroup,
 )
 
+from .equations import typst_number
 from .theme import FONT, MUTED, TEXT, sign_color
 from .trace import DEFAULT_DECIMALS, ForwardTrace, probability_typst, typst_label
 
@@ -170,6 +171,29 @@ class NetworkDiagram(VGroup):
             number.next_to(edge.point_from_proportion(0.5), UP if k == 0 else DR, buff=0.12)
             labels.append(number)
         return labels
+
+    def signal_lines(self, layer: int, index: int) -> list[Line]:
+        """Bright copies of the edges into one neuron, colored by the sign of the signal each one carries.
+
+        The signal of an edge is weight x incoming activation (trace.contributions). Feed these to ShowPassingFlash.
+        """
+        lines = []
+        for (l, to, src), edge in self.edges.items():
+            if l == layer and to == index:
+                signal = self.trace.contributions[layer - 1][to][src]
+                lines.append(edge.copy().set_stroke(color=sign_color(signal), width=edge.get_stroke_width() + 4, opacity=1))
+        return lines
+
+    def pre_activation_label(self, layer: int, index: int) -> MathTypst:
+        """'z = 2.40' for one neuron: above a hidden node, or where the probability will appear for an output node."""
+        z = self.trace.pre_activations[layer - 1][index]
+        is_output = layer == self.trace.last_layer
+        label = MathTypst("z = " + typst_number(z), font_size=30 if is_output else 22, color=sign_color(z))
+        if is_output:
+            label.move_to(self.output_labels[index].prob, aligned_edge=LEFT)
+        else:
+            label.next_to(self.nodes[layer][index].ring, UP, buff=0.08)
+        return label
 
     def show_all_activations(self) -> "NetworkDiagram":
         """Instantly show every node in its computed state (used for reference stills and tests)."""
