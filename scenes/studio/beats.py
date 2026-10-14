@@ -19,9 +19,9 @@ from __future__ import annotations
 import json
 import os
 
-from manim import MovingCameraScene, Restore, ThreeDScene
+from manim import DOWN, FadeIn, FadeOut, MovingCameraScene, Mobject, Restore, Text, ThreeDScene
 
-from .theme import BG
+from .theme import BG, FONT, TEXT
 
 
 class BeatMixin:
@@ -70,11 +70,27 @@ class BeatMixin:
 
 
 class BeatScene(BeatMixin, MovingCameraScene):
-    """A 2D video made of beats, with camera zoom helpers."""
+    """A 2D video made of beats, with camera zoom helpers and a caption line."""
+
+    caption_y = -2.55  # where the caption sits (scene units; the bottom edge of the screen is -4)
+    caption_max_width = 13.0  # longer text is shrunk to fit; the screen is 14.22 wide
 
     def setup(self) -> None:
         super().setup()
         self._camera_saved = False
+        self.caption_now = None
+
+    def swap_caption(self, text, run_time: float = 0.6, font_size: float = 28):
+        """Replace the caption: the old one fades out while the new one (a string or any mobject) fades in."""
+        if isinstance(text, Mobject):
+            new = text
+        else:
+            new = Text(text, font=FONT, font_size=font_size, color=TEXT)
+            if new.width > self.caption_max_width:
+                new.scale_to_fit_width(self.caption_max_width)
+            new.move_to([0, self.caption_y, 0])
+        old, self.caption_now = self.caption_now, new
+        self.play(*([FadeOut(old)] if old else []), FadeIn(new), run_time=run_time)
 
     def zoom_to(self, center, width: float):
         """An animation that moves the camera to `center` so that `width` scene units fit across the screen.

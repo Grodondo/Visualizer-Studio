@@ -31,6 +31,8 @@ A scene only *shows* numbers it reads from the trace, so a video can never disag
 |---|---|---|
 | `scenes/mlp_forward.py` | The video. The `KNOBS` block at the top and the `beat_*` methods. | **Edit freely.** Start here. |
 | `scenes/example_new_scene.py` | A tiny starter scene to copy for new ideas. | **Edit freely.** |
+| `scenes/saddle_point.py` | The second video, a 3D scene (section 8). | **Edit freely** (its `KNOBS` block, like the first video). |
+| `compute/saddle.py` | The mathematics behind it: the surface, its Hessian, the classification. | Edit the `HESSIAN`, then export (section 8). |
 | `scenes/studio/theme.py` | Colors, font, text sizes. One value changes the whole video. | **Edit freely** (keep blue = positive, orange = negative). |
 | `compute/mlp_presets.py` | The network's weights, biases and neuron names (`xor_preset()`). | Edit, then run the export (section 4). |
 | `scenes/studio/network.py` | Draws the network (`NetworkDiagram`, `Node`). Layout and encoding constants at the top. | Constants are safe; code: with care. |
@@ -376,3 +378,64 @@ An MP4 is a flat sequence of pictures: the words in it are just pixels. The sour
   `Table` or `BarChart`; treat those as unavailable until tested. This project uses `MathTypst`, `DecimalNumber(..., mob_class=MathTypst)` and `Axes(include_numbers=False)`.
 * Error messages: the last lines of the traceback name the file and line. `NameError` = a name you removed or misspelled; `KeyError`/`IndexError` after a
   structure change = something still expects the old shape (section 4.5).
+
+## 8. A second video: "Why is a saddle point not a minimum?" (3D)
+
+A 35-second 3D explainer built from the same studio, with the same split: **`compute/saddle.py` does the mathematics, `scenes/saddle_point.py` only draws it.**
+
+```powershell
+uv run python -m compute.saddle                              # write assets/saddle/saddle_trace.json (generated)
+uv run manim -ql scenes/saddle_point.py SaddlePoint          # draft; 3D is slower: about a minute at 480p15
+uv run manim -qm scenes/saddle_point.py SaddlePoint          # 720p30, about two minutes
+$env:BEATS = "along-x"; uv run manim -ql scenes/saddle_point.py SaddlePoint; Remove-Item Env:BEATS   # one beat: about 10 seconds
+uv run python scenes/studio/inspect_video.py media/videos/saddle_point/480p15/SaddlePoint.mp4
+```
+
+The five beats are `surface`, `flat-spot`, `along-x`, `along-y`, `conclusion`. What each file owns:
+
+* `compute/saddle.py`: the surface is `f(x, y) = 1/2 (x, y) H (x, y)^T`; `HESSIAN` is the matrix `H`. It computes the gradient at the center (0, 0), the
+  curvature along x and along y, the eigenvalues, and the classification (all positive = minimum, all negative = maximum, mixed = saddle).
+* `scenes/saddle_point.py`: rebuilds the surface from `H` in the trace, draws the exported slice curves, and prints the traced gradient and curvatures.
+  The video asserts `classification == "saddle"`; with a matrix that is not a saddle it stops instead of telling a false story.
+* `scenes/studio/beats.py`: `BeatScene3D` is the 3D twin of `BeatScene` (same beats, same `BEATS` filter, same `beats.json`).
+
+3D camera knobs, at the top of the scene: `phi` tilts the camera (0 = straight down, 90 = level with the surface), `theta` turns it around the vertical axis.
+`self.move_camera(phi=..., theta=..., run_time=...)` flies to a new view; `begin_ambient_camera_rotation(rate=...)` turns it slowly until `stop_ambient_camera_rotation()`.
+Text that must stay flat on screen goes through the scene's `fixed(...)` helper (`add_fixed_in_frame_mobjects`). I tested the whole video, a single-beat render, and the tests.
+
+Exercise: in `compute/saddle.py` change `HESSIAN` to `[[2.0, 0.0], [0.0, 2.0]]` (a bowl), run `uv run python -m compute.saddle` and `uv run pytest -q`.
+Expected (I ran it, then undid it): before the export, `test_committed_trace_is_up_to_date` and three more tests fail ("you changed the model but did not export");
+after the export only the three tests that pin the story's numbers still fail on purpose (curvature 2 and -2, "rises along x and falls along y"), the
+classification in the trace becomes "minimum", and rendering the scene stops with the message "this video explains a saddle point", because a bowl is not a saddle.
+A minimum would need a new story; this is the place to make it. Undo by changing the matrix back and running the export again.
+
+## 9. A third video: "How does a network read a handwritten digit?" (real data)
+
+A 95-second explainer about a real network that reads real handwritten digits. Same split as before: **`compute/digits.py` trains and exports, `scenes/digit_network.py` only draws.**
+
+```powershell
+uv run python -m compute.digits                                  # first time: downloads two small files (about 0.8 MB) into assets/data/, trains (a few seconds), writes assets/digits/digits_trace.json
+uv run manim -ql scenes/digit_network.py DigitRecognition        # draft, 480p15, about 45 seconds to render
+uv run manim -qm scenes/digit_network.py DigitRecognition        # 720p30
+$env:BEATS = "activation-functions"; uv run manim -ql scenes/digit_network.py DigitRecognition; Remove-Item Env:BEATS   # one beat
+uv run python scenes/studio/inspect_video.py media/videos/digit_network/480p15/DigitRecognition.mp4 --per-beat 4
+```
+
+The nine beats are `digit`, `network`, `one-neuron`, `what-neurons-learn`, `activation-functions`, `forward-pass`, `answer`, `mistake`, `learning`.
+
+**Where the data comes from.** Pixels: the UCI "Optical Recognition of Handwritten Digits" dataset (Alpaydin & Kaynak, 1998, CC BY 4.0; 8 x 8 images, ink 0 to 16),
+downloaded on first use and not committed (`assets/data/` is gitignored). Weights: learned by `compute/digits.py` (plain numpy, fixed seed). Forward pass: computed
+from those weights. The video shows one test digit the network reads correctly and the first test digit it gets wrong. Nothing on screen is drawn by hand;
+the only schematic is the thin lines from the picture to the hidden neurons, each standing for 64 weights (the video says so).
+
+What each file owns:
+
+* `compute/digits.py`: download, training, the choice of the example digits, the activation curves. Knobs at its top: `EPOCHS`, `LAYER_SIZES`, `SHOWCASE_CLASS`.
+* `scenes/studio/digits_trace.py`: reads the JSON (`DigitsTrace`); the scene imports this and never `compute`.
+* `scenes/studio/digit_network.py`: the drawing pieces: `PixelGrid` (a picture or a weight map), `weight_gallery`, `DigitNetwork`, `ProbabilityBars`.
+* `scenes/digit_network.py`: the nine beats. Layout numbers sit in the knob block at its top (`PANEL_Y`, `ROW_Y`, `TABLE_X`, ...).
+* `tests/test_digits.py`: recomputes the forward pass from the exported weights with numpy, checks the sums, the colors, and that text fits the frame.
+  One test also re-evaluates the weights on the real test file and is skipped if you have not downloaded it.
+
+Exercise (not run; try it and look at the still): in `scenes/digit_network.py` change `DIM_AMOUNT` from 0.88 to 0.5, then render only `one-neuron`
+with the `BEATS` command above. The other neurons stay visible while one is studied. Undo by restoring 0.88.
