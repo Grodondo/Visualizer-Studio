@@ -1,0 +1,23 @@
+# Manim output
+media/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Node / web
+node_modules/
+web/dist/
+
+# Large or downloaded datasets (derived small exports under assets/ are committed)
+assets/data/
+*.fif
+*.nii
+*.nii.gz
+*.h5
+*.hdf5
+
+# Browser-automation scratch output
+.playwright-mcp/

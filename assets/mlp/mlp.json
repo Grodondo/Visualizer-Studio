@@ -1,0 +1,251 @@
+{
+ "schema": 1,
+ "presets": [
+  {
+   "id": "xor",
+   "title": "XOR (hand-designed)",
+   "description": "Says 'different' when exactly one of the two inputs is high. Weights were chosen by hand so each hidden unit has a nameable role; nothing was trained.",
+   "activation": "tanh",
+   "layer_sizes": [
+    2,
+    4,
+    3,
+    2
+   ],
+   "weights": [
+    [
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      -4,
+      -4
+     ],
+     [
+      -4,
+      -4
+     ]
+    ],
+    [
+     [
+      1.5,
+      0,
+      1.5,
+      0
+     ],
+     [
+      0,
+      2,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      2
+     ]
+    ],
+    [
+     [
+      3,
+      -1.5,
+      -1.5
+     ],
+     [
+      -3,
+      1.5,
+      1.5
+     ]
+    ]
+   ],
+   "biases": [
+    [
+     -2,
+     -6,
+     6,
+     2
+    ],
+    [
+     -1.5,
+     0,
+     0
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "input_labels": [
+    "x1",
+    "x2"
+   ],
+   "neuron_labels": [
+    null,
+    [
+     "OR",
+     "AND",
+     "NAND",
+     "NOR"
+    ],
+    [
+     "exactly one",
+     "both",
+     "neither"
+    ],
+    [
+     "different",
+     "same"
+    ]
+   ],
+   "input_range": [
+    0.0,
+    1.0
+   ],
+   "default_input": [
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "random",
+   "title": "Random weights (seed 7)",
+   "description": "Untrained random weights: the outputs mean nothing. Use it to see how any weights turn inputs into activations.",
+   "activation": "tanh",
+   "layer_sizes": [
+    3,
+    5,
+    4,
+    3
+   ],
+   "weights": [
+    [
+     [
+      0.0,
+      0.3,
+      -0.27
+     ],
+     [
+      -0.89,
+      -0.45,
+      -0.99
+     ],
+     [
+      0.06,
+      1.34,
+      -0.49
+     ],
+     [
+      -0.62,
+      0.49,
+      0.36
+     ],
+     [
+      0.11,
+      -0.93,
+      -0.03
+     ]
+    ],
+    [
+     [
+      0.7,
+      -1.34,
+      -0.46,
+      -1.9,
+      -1.29
+     ],
+     [
+      -1.84,
+      -0.24,
+      -1.27,
+      0.27,
+      0.16
+     ],
+     [
+      -0.19,
+      -2.52,
+      -0.54,
+      -0.05,
+      0.11
+     ],
+     [
+      -1.53,
+      -0.48,
+      -0.98,
+      -0.81,
+      1.06
+     ]
+    ],
+    [
+     [
+      -0.81,
+      -0.03,
+      0.88,
+      -0.58
+     ],
+     [
+      -0.11,
+      0.11,
+      0.06,
+      -1.23
+     ],
+     [
+      0.08,
+      1.36,
+      -1.55,
+      0.86
+     ]
+    ]
+   ],
+   "biases": [
+    [
+     0.04,
+     -0.19,
+     0.6,
+     0.23,
+     -0.36
+    ],
+    [
+     0.02,
+     0.17,
+     -0.06,
+     0.2
+    ],
+    [
+     -0.02,
+     0.2,
+     0.43
+    ]
+   ],
+   "input_labels": [
+    "in 1",
+    "in 2",
+    "in 3"
+   ],
+   "neuron_labels": [
+    null,
+    null,
+    null,
+    [
+     "out A",
+     "out B",
+     "out C"
+    ]
+   ],
+   "input_range": [
+    -1.0,
+    1.0
+   ],
+   "default_input": [
+    0.8,
+    -0.4,
+    0.5
+   ]
+  }
+ ]
+}
