@@ -80,8 +80,8 @@ class BeatScene(BeatMixin, MovingCameraScene):
         self._camera_saved = False
         self.caption_now = None
 
-    def swap_caption(self, text, run_time: float = 0.6, font_size: float = 28):
-        """Replace the caption: the old one fades out while the new one (a string or any mobject) fades in."""
+    def swap_caption(self, text, run_time: float = 0.6, font_size: float = 28, extra=()):
+        """Replace the caption: the old one fades out while the new one (a string or any mobject) fades in. `extra` animations play alongside."""
         if isinstance(text, Mobject):
             new = text
         else:
@@ -90,7 +90,7 @@ class BeatScene(BeatMixin, MovingCameraScene):
                 new.scale_to_fit_width(self.caption_max_width)
             new.move_to([0, self.caption_y, 0])
         old, self.caption_now = self.caption_now, new
-        self.play(*([FadeOut(old)] if old else []), FadeIn(new), run_time=run_time)
+        self.play(*([FadeOut(old)] if old else []), FadeIn(new), *extra, run_time=run_time)
 
     def zoom_to(self, center, width: float):
         """An animation that moves the camera to `center` so that `width` scene units fit across the screen.

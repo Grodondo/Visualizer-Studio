@@ -1,0 +1,10 @@
+{
+ "rule": "the first test seed, shuffled wiring",
+ "seeds": [
+  1001
+ ],
+ "clips": [
+  "shuffle_clip_1001.json"
+ ],
+ "gain": 2.0
+}

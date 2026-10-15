@@ -751,3 +751,33 @@ What this shows, and what it does not:
 * Not shown by this experiment: anything about real fly behaviour or intelligence. The model is one published simulation with
   uniform neurons and predicted transmitter signs; the eye, the encoder and the decoder are ours. `tests/test_closed_loop.py`
   pins each sentence above to the recorded numbers.
+
+### 13d. The video of Milestone 3: "FlyPlays"
+
+`scenes/flydoom_fly.py` (class `FlyPlays`, about 69 s at 480p15, beats `open`, `loop`, `react`, `footage`, `shuffle`, `compare`). It subclasses the
+Milestone 1 draft to reuse its game view, timeline and image helpers; the draft itself is unchanged apart from splitting out `index_clips()`.
+
+```powershell
+uv run --group flydoom python -m flydoom.fly_export              # fly episodes + simulated spikes (~2 min)
+uv run --group flydoom python -m flydoom.fly_export --shuffle    # the shuffled-wiring control on the first test seed
+uv run --group flydoom python -m flydoom.activity_frames         # one spike image per game step, 1831 images (~3 min)
+uv run --group flydoom python -m flydoom.activity_frames --shuffle
+uv run manim -ql scenes/flydoom_fly.py FlyPlays
+uv run --group flydoom pytest -q tests/test_fly_visual.py
+```
+
+What you see: the fly's own episodes (test seeds in order until 40 s: 1001-1005, 52.3 s, the same rule as Milestone 1), the chain
+eye -> brain -> decoder -> keys as live bars and keycaps, and the model's SIMULATED spikes drawn at the neurons' measured FlyWire positions
+(input cells cyan/amber by side, steering neurons white, all others magenta; the color says what a neuron is, never how strongly it fired).
+`loop` freezes on one moment and explains the four steps. `react` replays the first threat step by step (seed 1001, step 76: a threat on the
+right, the right input cells fire, one step later the left steering neurons fire, one step after that the key LEFT). `footage` plays the rest
+at 2.5x speed (shown on screen). `shuffle` replays seed 1001 with shuffled wiring: 20,640 input spikes, 0 steering spikes, no key ever pressed.
+`compare` shows the survival table above, with the two counts (fly beats reflex on 3/10, scripted AI beats fly on 9/10) computed from the data.
+The 5-seed tuning problem is deliberately left out of the video; it stays in section 13c.
+
+Every caption that makes a claim is built from the data, and `FlyPlays.read_story` asserts it before rendering (threat side, which steering
+side fires, that the key matches), so changing the data cannot silently leave a false caption. `tests/test_fly_visual.py` also checks that
+each clip is its recorded episode (same frame hash), that spike files and images have one entry per step, and that the controls and legend fit.
+Knobs at the top of the scene: `FREEZE_BEFORE`, `SLOW`, `FAST`, `HOLD`, `CAPTION_SIZE`, `STEER_MAX_HZ`, `SHOWN` (rows of the comparison);
+spike marker sizes are `SIZES` in `flydoom/activity_frames.py` (regenerate the images after changing them). An overview of the whole
+experiment is in `flydoom/README.md`.

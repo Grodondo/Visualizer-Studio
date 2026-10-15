@@ -1,6 +1,7 @@
 """Draw the model's SIMULATED spikes, one transparent image per game tic, at the neurons' measured FlyWire positions.
 
     uv run --group flydoom python -m flydoom.activity_frames      # ~3 minutes -> media/flydoom_fly_activity/
+    uv run --group flydoom python -m flydoom.activity_frames --shuffle   # the shuffled-wiring control -> media/flydoom_shuffle_activity/
 
 Same camera as flydoom/brain_frames.py (seen from behind, so the fly's left is the viewer's left, like the game) and the same
 framing as media/flydoom_brain/back_all.png, so an activity frame lies exactly on top of the anatomy image.
@@ -14,6 +15,7 @@ on video). Colors encode the neuron's ROLE, never activity strength:
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -34,7 +36,7 @@ ANNOTATIONS = ROOT / "assets" / "data" / "flywire" / "Supplemental_file1_neuron_
 ANGLE, PX = 180, (2400, 1333)  # must match flydoom/brain_frames.py
 GLOW_TICS = 4
 COLORS = {"left": "#5ec8ff", "right": "#ffb454", "steer": "#ffffff", "giant": "#ffffff", "other": "#ff5fd2"}
-SIZES = {"left": 10, "right": 10, "steer": 90, "giant": 60, "other": 6}
+SIZES = {"left": 30, "right": 30, "steer": 160, "giant": 100, "other": 14}
 
 
 def model_positions(con: md.Connectome) -> np.ndarray:
@@ -46,7 +48,7 @@ def model_positions(con: md.Connectome) -> np.ndarray:
     return np.where(np.isnan(soma).any(axis=1)[:, None], pos, soma) * np.array([4.0, 4.0, 40.0]) / 1000.0
 
 
-def main() -> None:
+def main(prefix: str = "fly") -> None:
     con = md.load("783")
     xyz_all, _, _ = fr.load()
     center = fr.center_of(xyz_all)  # identical to brain_frames.py
@@ -59,13 +61,14 @@ def main() -> None:
         for t in ("DNa01", "DNa02"):
             role[g[(t, side)]] = "steer"
         role[g[("DNp01", side)]] = "giant"
-    act = np.load(ROOT / "assets" / "flydoom" / "fly_activity.npz")
+    act = np.load(ROOT / "assets" / "flydoom" / f"{prefix}_activity.npz")
     idx, off = act["idx"], act["offsets"]
-    footage = json.loads((ROOT / "assets" / "flydoom" / "fly_footage.json").read_text(encoding="utf-8"))
+    footage = json.loads((ROOT / "assets" / "flydoom" / f"{prefix}_footage.json").read_text(encoding="utf-8"))
+    out_dir = OUT if prefix == "fly" else OUT.with_name(f"flydoom_{prefix}_activity")
     n_tics = len(off) - 1
     half_h = fr.HALF_WIDTH_UM * PX[1] / PX[0]
     starts = np.cumsum([0] + [json.loads((ROOT / "assets" / "flydoom" / c).read_text(encoding="utf-8"))["tics"] for c in footage["clips"]])
-    OUT.mkdir(parents=True, exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
     fig = plt.figure(figsize=(PX[0] / 100, PX[1] / 100), dpi=100)
     ax = fig.add_axes([0, 0, 1, 1])
     for t in range(n_tics):
@@ -87,14 +90,14 @@ def main() -> None:
                         ax.scatter(xy[sel, 0], xy[sel, 1], s=SIZES[r], facecolors="none", edgecolors=COLORS[r], linewidths=1.5, alpha=alpha)
                     else:
                         ax.scatter(xy[sel, 0], xy[sel, 1], s=SIZES[r], c=COLORS[r], alpha=alpha * (0.8 if r == "other" else 1.0), linewidths=0)
-        fig.savefig(OUT / f"{t:05d}.png", transparent=True)
+        fig.savefig(out_dir / f"{t:05d}.png", transparent=True)
         if t % 300 == 0:
             print(f"  {t}/{n_tics}", flush=True)
     plt.close(fig)
-    (OUT / "manifest.json").write_text(json.dumps({"tics": n_tics, "angle": ANGLE, "px": PX, "glow_tics": GLOW_TICS, "colors": COLORS,
+    (out_dir / "manifest.json").write_text(json.dumps({"tics": n_tics, "angle": ANGLE, "px": PX, "glow_tics": GLOW_TICS, "colors": COLORS,
                                                    "center_um": [float(v) for v in center], "half_width_um": fr.HALF_WIDTH_UM}, indent=1), encoding="utf-8")
-    print(f"wrote {n_tics} activity frames to {OUT.relative_to(ROOT)}")
+    print(f"wrote {n_tics} activity frames to {out_dir.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
-    main()
+    main("shuffle" if "--shuffle" in sys.argv else "fly")

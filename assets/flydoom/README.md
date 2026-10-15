@@ -4,3 +4,5 @@ the fly pipeline's input/output cell types; FlyWire v783, CC BY 4.0). Model chec
 and `brian_check.json` (`flydoom.brian_check`), Shiu et al. 2024 model, MIT. No personal data: human recordings live in
 `assets/data/flydoom/human/` (gitignored). Game: ViZDoom 1.3.1 (code original to ViZDoom: MIT per its README), scenario take_cover,
 graphics Freedoom (BSD-3-Clause).
+
+Milestone 3: `fly_results.json` (`flydoom.fly_trials`), `fly_footage.json` + `fly_clip_*.json` + `fly_activity.npz` (the fly's episodes and its simulated spikes), `shuffle_*` (the same for the shuffled-wiring control; `flydoom.fly_export`). Overview: `flydoom/README.md`.

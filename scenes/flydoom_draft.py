@@ -73,6 +73,10 @@ class FlyDoomDraft(BeatScene):
         self.io = json.loads(FLY_IO.read_text(encoding="utf-8"))
         self.bm = json.loads((BRAIN_DIR / "manifest.json").read_text(encoding="utf-8"))
         self.tm = json.loads((TURNTABLE_DIR / "manifest.json").read_text(encoding="utf-8"))
+        self.index_clips()
+
+    def index_clips(self):
+        """Per-tic arrays over all of self.clips (episodes back to back)."""
         self.rate = self.clips[0]["ticrate"]
         self.starts = np.cumsum([0] + [c["tics"] for c in self.clips])  # global tic where each episode starts
         self.total_tics = int(self.starts[-1])
