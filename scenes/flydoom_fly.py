@@ -1,4 +1,4 @@
-"""FlyPlays (Milestone 3): the simulated fly brain plays the game, in a closed loop. About 60 seconds, little text.
+"""FlyPlays (Milestone 3): the simulated fly brain plays the game, in a closed loop. About 70 seconds, little text.
 
 First time (needs the FlyWire annotation file in assets/data/flywire, see assets/flydoom/README.md):
     uv run --group flydoom python -m flydoom.fly_export              # fly episodes + simulated spikes (about 2 minutes)
