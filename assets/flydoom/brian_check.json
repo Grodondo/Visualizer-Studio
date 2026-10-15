@@ -1,0 +1,18 @@
+{
+ "replay": {
+  "target_spikes_brian": 264,
+  "target_spikes_port": 264,
+  "inputs_replayed": 10035,
+  "max_abs_dv_mV": 0.0
+ },
+ "sugar": {
+  "trials_each": 30,
+  "pearson_rates": 0.99991,
+  "neurons_over_5hz": 334,
+  "neurons_z_over_3": 5,
+  "mn9_hz": {
+   "brian2": 92.97,
+   "port": 91.23
+  }
+ }
+}

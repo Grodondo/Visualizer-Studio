@@ -1,0 +1,517 @@
+{
+ "model": "Shiu et al. 2024 LIF, numba port (flydoom/lif.py)",
+ "params": {
+  "v_0": -52.0,
+  "v_rst": -52.0,
+  "v_th": -45.0,
+  "t_mbr": 20.0,
+  "tau": 5.0,
+  "t_rfc": 2.2,
+  "t_dly": 1.8,
+  "w_syn": 0.275,
+  "f_poi": 250.0,
+  "dt": 0.1
+ },
+ "data_commit": "91bdd1e",
+ "part_a": {
+  "release": "630",
+  "stimulus": "21 right sugar GRNs, 200 Hz Poisson, 30 x 1 s",
+  "reference": "Shiu et al. Brian2 sugarR.parquet",
+  "active_ours": 448,
+  "active_reference": 448,
+  "pearson_rates": 0.99982,
+  "mn9_hz": {
+   "ours": 91.23,
+   "ours_se": 0.79,
+   "reference": 93.27
+  }
+ },
+ "part_b": {
+  "release": "783",
+  "trials": 10,
+  "shuffle": "post-synaptic partners permuted (degree-preserving), seed 7",
+  "sugar_cells": 20,
+  "sugar_ids_missing_in_783": [
+   "720575940620900446"
+  ],
+  "looming_cells_right": 152,
+  "read_cells": {
+   "DNp01_right": 1,
+   "DNp01_left": 1,
+   "DNa01_right": 1,
+   "DNa01_left": 1,
+   "DNa02_right": 1,
+   "DNa02_left": 1
+  },
+  "sugar_200hz": {
+   "real": {
+    "MN9_right": {
+     "mean_hz": 91.1,
+     "per_cell_hz": [
+      91.1
+     ],
+     "se_hz": [
+      0.99
+     ]
+    },
+    "MN9_left": {
+     "mean_hz": 62.2,
+     "per_cell_hz": [
+      62.2
+     ],
+     "se_hz": [
+      1.15
+     ]
+    },
+    "active_neurons": 436
+   },
+   "shuffled": {
+    "MN9_right": {
+     "mean_hz": 0.0,
+     "per_cell_hz": [
+      0.0
+     ],
+     "se_hz": [
+      0.0
+     ]
+    },
+    "MN9_left": {
+     "mean_hz": 0.0,
+     "per_cell_hz": [
+      0.0
+     ],
+     "se_hz": [
+      0.0
+     ]
+    },
+    "active_neurons": 225
+   }
+  },
+  "looming_right": {
+   "50": {
+    "real": {
+     "DNp01_right": {
+      "mean_hz": 125.4,
+      "per_cell_hz": [
+       125.4
+      ],
+      "se_hz": [
+       1.09
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 72.8,
+      "per_cell_hz": [
+       72.8
+      ],
+      "se_hz": [
+       0.81
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 23.0,
+      "per_cell_hz": [
+       23.0
+      ],
+      "se_hz": [
+       0.42
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 31.9,
+      "per_cell_hz": [
+       31.9
+      ],
+      "se_hz": [
+       0.77
+      ]
+     },
+     "active_neurons": 656
+    },
+    "shuffled": {
+     "DNp01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "active_neurons": 334
+    }
+   },
+   "100": {
+    "real": {
+     "DNp01_right": {
+      "mean_hz": 164.2,
+      "per_cell_hz": [
+       164.2
+      ],
+      "se_hz": [
+       0.8
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 92.4,
+      "per_cell_hz": [
+       92.4
+      ],
+      "se_hz": [
+       0.73
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 37.1,
+      "per_cell_hz": [
+       37.1
+      ],
+      "se_hz": [
+       0.86
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 41.5,
+      "per_cell_hz": [
+       41.5
+      ],
+      "se_hz": [
+       0.98
+      ]
+     },
+     "active_neurons": 837
+    },
+    "shuffled": {
+     "DNp01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "active_neurons": 489
+    }
+   },
+   "200": {
+    "real": {
+     "DNp01_right": {
+      "mean_hz": 206.1,
+      "per_cell_hz": [
+       206.1
+      ],
+      "se_hz": [
+       0.43
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 102.1,
+      "per_cell_hz": [
+       102.1
+      ],
+      "se_hz": [
+       0.6
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 40.3,
+      "per_cell_hz": [
+       40.3
+      ],
+      "se_hz": [
+       0.73
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 20.8,
+      "per_cell_hz": [
+       20.8
+      ],
+      "se_hz": [
+       0.71
+      ]
+     },
+     "active_neurons": 1102
+    },
+    "shuffled": {
+     "DNp01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNp01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa01_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_right": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "DNa02_left": {
+      "mean_hz": 0.0,
+      "per_cell_hz": [
+       0.0
+      ],
+      "se_hz": [
+       0.0
+      ]
+     },
+     "active_neurons": 1002
+    }
+   }
+  },
+  "no_stimulus": {
+   "MN9_right": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "MN9_left": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNp01_right": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNp01_left": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNa01_right": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNa01_left": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNa02_right": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "DNa02_left": {
+    "mean_hz": 0.0,
+    "per_cell_hz": [
+     0.0
+    ],
+    "se_hz": [
+     0.0
+    ]
+   },
+   "active_neurons": 0
+  }
+ },
+ "runtime_s": 109
+}

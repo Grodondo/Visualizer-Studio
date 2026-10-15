@@ -1,0 +1,1816 @@
+{
+ "design": {
+  "encoder": "rate = min(200 Hz, gain x expansion), both LC4 and LPLC2 of that side",
+  "decoder": "DNa01+DNa02 per side, low-pass 100 ms, dead band 10 Hz, ipsilateral step",
+  "model": "Shiu et al. 2024 LIF on FlyWire v783 (flydoom/lif.py)"
+ },
+ "calibration": {
+  "grid": {
+   "0.5": 7.143,
+   "1.0": 9.057,
+   "2.0": 16.457,
+   "4.0": 9.771,
+   "8.0": 8.657
+  },
+  "chosen_gain": 2.0,
+  "seeds": [
+   9001,
+   9005,
+   9008,
+   9010,
+   9014
+  ]
+ },
+ "test_seeds": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005,
+  1006,
+  1009,
+  1011,
+  1012,
+  1013
+ ],
+ "reproducible_rerun": {
+  "seed": 1001,
+  "identical": true
+ },
+ "distinct_episodes": {
+  "fly": 10,
+  "fly_shuffled": 10,
+  "fly_no_giant_fiber": 10
+ },
+ "controllers": {
+  "fly": {
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.65,
+     8.0143,
+     11.2143
+    ],
+    "hits_q": [
+     1.0,
+     1.0,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.0764,
+     0.1147,
+     0.1716
+    ],
+    "switches_per_s_q": [
+     0.9289,
+     1.2938,
+     1.491
+    ],
+    "reaction_s_q": [
+     0.0286,
+     0.1143,
+     0.5143
+    ],
+    "reactions_measured": 39,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.1429
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": 0.821,
+    "events": 67,
+    "already_moving": 15,
+    "no_response": 13,
+    "reached_cap": 0
+   }
+  },
+  "fly_shuffled": {
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.1286,
+     4.2857,
+     5.7357
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "switches_per_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reaction_s_q": null,
+    "reactions_measured": 0,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": null,
+    "events": 31,
+    "already_moving": 0,
+    "no_response": 31,
+    "reached_cap": 0
+   }
+  },
+  "fly_no_giant_fiber": {
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     5.7572,
+     8.8285,
+     11.6572
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.089,
+     0.1242,
+     0.1867
+    ],
+    "switches_per_s_q": [
+     0.9319,
+     1.0634,
+     1.4668
+    ],
+    "reaction_s_q": [
+     0.0286,
+     0.0571,
+     0.4286
+    ],
+    "reactions_measured": 41,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.2428
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": 0.878,
+    "events": 80,
+    "already_moving": 19,
+    "no_response": 20,
+    "reached_cap": 0
+   }
+  }
+ },
+ "episodes": [
+  {
+   "seed": 1001,
+   "controller": "fly",
+   "tics": 437,
+   "survival_s": 12.4857,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0892,
+   "switches_per_s": 1.2815,
+   "events": 7,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0571,
+    0.1714,
+    0.8,
+    0.0,
+    0.0286,
+    0.4857
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.1429,
+    0.0,
+    0.7714,
+    0.0,
+    0.9714,
+    0.5143
+   ],
+   "frame_hash": "c0bc37e8919b19c6d051ac34a69ac105132995183949e3e6fc38e55be4070028"
+  },
+  {
+   "seed": 1002,
+   "controller": "fly",
+   "tics": 417,
+   "survival_s": 11.9143,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.2134,
+   "switches_per_s": 0.9233,
+   "events": 10,
+   "already_moving": 3,
+   "no_response": 5,
+   "reaction_s": [
+    0.9143,
+    1.0
+   ],
+   "away": [
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.9143,
+    0.0,
+    0.0,
+    0.9429,
+    0.0,
+    0.0,
+    0.0571
+   ],
+   "frame_hash": "4524473a0cb8d52983dea9627e00e53e421d657370c8f96ccc48424f9df71c0f"
+  },
+  {
+   "seed": 1003,
+   "controller": "fly",
+   "tics": 277,
+   "survival_s": 7.9143,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.1372,
+   "switches_per_s": 0.8845,
+   "events": 4,
+   "already_moving": 1,
+   "no_response": 1,
+   "reaction_s": [
+    0.4571,
+    0.0286
+   ],
+   "away": [
+    false,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "4f2c32a3b55bf92fb0421786c3831c6f1eb24745adb39927a3ebdd93cd26c642"
+  },
+  {
+   "seed": 1004,
+   "controller": "fly",
+   "tics": 111,
+   "survival_s": 3.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0721,
+   "switches_per_s": 0.9459,
+   "events": 3,
+   "already_moving": 1,
+   "no_response": 1,
+   "reaction_s": [
+    0.0286
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "85859e69ec13d4c6f90f412a082d2ede20c0a07fe60d056f351a81d7ad940c2d"
+  },
+  {
+   "seed": 1005,
+   "controller": "fly",
+   "tics": 589,
+   "survival_s": 16.8286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.202,
+   "switches_per_s": 1.8421,
+   "events": 20,
+   "already_moving": 3,
+   "no_response": 1,
+   "reaction_s": [
+    0.0286,
+    0.3714,
+    0.0286,
+    0.2,
+    0.0286,
+    0.0,
+    0.4857,
+    0.0286,
+    1.0,
+    0.0286,
+    0.1143,
+    0.6857,
+    0.2286,
+    0.9714,
+    0.8857,
+    0.5429
+   ],
+   "away": [
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.1429,
+    0.0,
+    0.0,
+    0.4286,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.6571,
+    0.2,
+    0.9714,
+    0.8857,
+    0.5429,
+    0.0
+   ],
+   "frame_hash": "054f129cad0060955b035c8c835263541ae4f1e50254837ad7bdd7d04204ed8e"
+  },
+  {
+   "seed": 1006,
+   "controller": "fly",
+   "tics": 319,
+   "survival_s": 9.1143,
+   "died": true,
+   "hits": 1,
+   "damage": 210.0,
+   "move_fraction": 0.1724,
+   "switches_per_s": 1.5361,
+   "events": 9,
+   "already_moving": 4,
+   "no_response": 1,
+   "reaction_s": [
+    0.0571,
+    0.0286,
+    0.0286,
+    0.2
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.1714,
+    0.0
+   ],
+   "frame_hash": "4df7a5617c87b7ea1c91a3a98ca3aee7eeaccf634132e60f305387168e6b44a7"
+  },
+  {
+   "seed": 1009,
+   "controller": "fly",
+   "tics": 284,
+   "survival_s": 8.1143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.169,
+   "switches_per_s": 1.3556,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 1,
+   "reaction_s": [
+    0.0286,
+    0.8571,
+    0.0286,
+    0.4571
+   ],
+   "away": [
+    true,
+    false,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4571
+   ],
+   "frame_hash": "69f14ce016569525cb996fcbfdb85f6551b2b653adecb78968de1bac5e98a977"
+  },
+  {
+   "seed": 1011,
+   "controller": "fly",
+   "tics": 152,
+   "survival_s": 4.3429,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0526,
+   "switches_per_s": 1.6118,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286,
+    0.0571,
+    0.7714
+   ],
+   "away": [
+    true,
+    true,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143
+   ],
+   "frame_hash": "47a809c2f390c3d25312a7121fd050e0b9fa83fdc6a728f244725a89ec9da3a3"
+  },
+  {
+   "seed": 1012,
+   "controller": "fly",
+   "tics": 195,
+   "survival_s": 5.5714,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0923,
+   "switches_per_s": 0.359,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "ca3b9f6f25d64a592b519543092819058998bfef4e47edd41a7bc472e68b4111"
+  },
+  {
+   "seed": 1013,
+   "controller": "fly",
+   "tics": 134,
+   "survival_s": 3.8286,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.0672,
+   "switches_per_s": 1.306,
+   "events": 2,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "a942106fd0ac947f06413142c9f065cf764cc7c773c31c917292f6256a860ed8"
+  },
+  {
+   "seed": 1001,
+   "controller": "fly_shuffled",
+   "tics": 214,
+   "survival_s": 6.1143,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 6,
+   "already_moving": 0,
+   "no_response": 6,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.1429,
+    0.0,
+    0.0,
+    0.1714
+   ],
+   "frame_hash": "95421dc36480719fd6f72456c07e1bd59a6baf42faff6bafa03bd37b7175d7c8"
+  },
+  {
+   "seed": 1002,
+   "controller": "fly_shuffled",
+   "tics": 206,
+   "survival_s": 5.8857,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 0,
+   "no_response": 4,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9143,
+    0.0,
+    0.3143
+   ],
+   "frame_hash": "1f8e0897d4a49c5a48508a634586b3314da5acd06115fb2572868a167b14627c"
+  },
+  {
+   "seed": 1003,
+   "controller": "fly_shuffled",
+   "tics": 149,
+   "survival_s": 4.2571,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "6c204334b3feb5b190d690dfbe57dba935187edeeab3b7e340445811970e2127"
+  },
+  {
+   "seed": 1004,
+   "controller": "fly_shuffled",
+   "tics": 111,
+   "survival_s": 3.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "76a7cba51489f101df1b2b22c0bb28b6a2237d42eb3007dec5ca122dec463632"
+  },
+  {
+   "seed": 1005,
+   "controller": "fly_shuffled",
+   "tics": 215,
+   "survival_s": 6.1429,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "01abb4c268d0635117ead8f8c9b8ab756e6973afef73ce99706187343fe44952"
+  },
+  {
+   "seed": 1006,
+   "controller": "fly_shuffled",
+   "tics": 149,
+   "survival_s": 4.2571,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "790488127413ad014ae1d2555e23dc98781ce501019ec3d56abb83695e8bd603"
+  },
+  {
+   "seed": 1009,
+   "controller": "fly_shuffled",
+   "tics": 143,
+   "survival_s": 4.0857,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "26cd134bb69cf7ba3ee7677432d976de918030c31eabf8aac4951f65f67416e6"
+  },
+  {
+   "seed": 1011,
+   "controller": "fly_shuffled",
+   "tics": 151,
+   "survival_s": 4.3143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143
+   ],
+   "frame_hash": "c6723bec1a780d4c95d5298724b30fda85dce040108e2da498af7c76adb0b819"
+  },
+  {
+   "seed": 1012,
+   "controller": "fly_shuffled",
+   "tics": 185,
+   "survival_s": 5.2857,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "abb7d696e9003cd0549bbef9f29332a027648c530bbcc71fef26731151e2b172"
+  },
+  {
+   "seed": 1013,
+   "controller": "fly_shuffled",
+   "tics": 134,
+   "survival_s": 3.8286,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "e24c3546887b9295fbf5abf229f49b0dbb0ae03456cc430e7a3b0497d67b801a"
+  },
+  {
+   "seed": 1001,
+   "controller": "fly_no_giant_fiber",
+   "tics": 439,
+   "survival_s": 12.5429,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0934,
+   "switches_per_s": 1.1162,
+   "events": 8,
+   "already_moving": 0,
+   "no_response": 1,
+   "reaction_s": [
+    0.0571,
+    0.1714,
+    0.0286,
+    0.8571,
+    0.2286,
+    0.0,
+    0.6286
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.1429,
+    0.0,
+    0.8286,
+    0.2,
+    0.0,
+    0.6286
+   ],
+   "frame_hash": "8289c36d4548f5192bae72bf7a61d97bdf99a157766d0d88eefe1a6a77b11fe3"
+  },
+  {
+   "seed": 1002,
+   "controller": "fly_no_giant_fiber",
+   "tics": 417,
+   "survival_s": 11.9143,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.199,
+   "switches_per_s": 1.259,
+   "events": 10,
+   "already_moving": 3,
+   "no_response": 5,
+   "reaction_s": [
+    0.0286,
+    0.8857
+   ],
+   "away": [
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.9143,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "4996298f8ce5248cb416e92a43663a3b335c4673a92412b16115c9ee3c0c78e0"
+  },
+  {
+   "seed": 1003,
+   "controller": "fly_no_giant_fiber",
+   "tics": 303,
+   "survival_s": 8.6571,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.1056,
+   "switches_per_s": 0.8086,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286,
+    0.6571,
+    0.6571,
+    0.0286,
+    0.0
+   ],
+   "away": [
+    true,
+    false,
+    false,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "dbdc5c716ad27f1ccc95bfe21c97894804192d5d2f34723e344db2d923d02c7d"
+  },
+  {
+   "seed": 1004,
+   "controller": "fly_no_giant_fiber",
+   "tics": 111,
+   "survival_s": 3.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0721,
+   "switches_per_s": 0.9459,
+   "events": 3,
+   "already_moving": 1,
+   "no_response": 1,
+   "reaction_s": [
+    0.0286
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "85859e69ec13d4c6f90f412a082d2ede20c0a07fe60d056f351a81d7ad940c2d"
+  },
+  {
+   "seed": 1005,
+   "controller": "fly_no_giant_fiber",
+   "tics": 224,
+   "survival_s": 6.4,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.1429,
+   "switches_per_s": 1.7188,
+   "events": 4,
+   "already_moving": 0,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286,
+    0.0286,
+    0.0286,
+    0.1143
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.1143
+   ],
+   "frame_hash": "a4d3a5a831e710372ccac036e90d08b7315b1214b0f6a4557c14138e5da112aa"
+  },
+  {
+   "seed": 1006,
+   "controller": "fly_no_giant_fiber",
+   "tics": 638,
+   "survival_s": 18.2286,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.2461,
+   "switches_per_s": 1.5361,
+   "events": 27,
+   "already_moving": 10,
+   "no_response": 5,
+   "reaction_s": [
+    0.0286,
+    0.0,
+    0.9714,
+    0.0286,
+    0.6286,
+    0.6571,
+    0.3714,
+    0.3714,
+    0.0286,
+    0.9143,
+    0.4286,
+    0.7714
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0286,
+    0.0,
+    1.0,
+    0.6,
+    0.0,
+    0.0,
+    0.6857,
+    0.4,
+    0.4,
+    0.0571,
+    0.0,
+    0.6286,
+    0.4857,
+    0.0,
+    0.0,
+    0.8
+   ],
+   "frame_hash": "aa70edb75f8f4fbe553dd22875f999b42ff1579cab7b1e82b6e44e5eb613f2bf"
+  },
+  {
+   "seed": 1009,
+   "controller": "fly_no_giant_fiber",
+   "tics": 315,
+   "survival_s": 9.0,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.2286,
+   "switches_per_s": 2.2222,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286,
+    0.0571,
+    0.0286,
+    0.1714,
+    0.4
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4286
+   ],
+   "frame_hash": "855a804b3d6f7f0a01d94d45c28e3d6474e3a415ed4957528a22bf57c17d7fa7"
+  },
+  {
+   "seed": 1011,
+   "controller": "fly_no_giant_fiber",
+   "tics": 151,
+   "survival_s": 4.3143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0265,
+   "switches_per_s": 0.9272,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 1,
+   "reaction_s": [
+    0.0286,
+    0.0286
+   ],
+   "away": [
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143
+   ],
+   "frame_hash": "c0db99917df2466df9e269bb00db9b39aedc9cd6154576ce3f0ca9d7889d144d"
+  },
+  {
+   "seed": 1012,
+   "controller": "fly_no_giant_fiber",
+   "tics": 194,
+   "survival_s": 5.5429,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0876,
+   "switches_per_s": 0.3608,
+   "events": 4,
+   "already_moving": 0,
+   "no_response": 4,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.6857,
+    0.3429
+   ],
+   "frame_hash": "6ce7a00ada99aac18c89022c091dc510fa4624e8f6b5c4086e03c27a83501379"
+  },
+  {
+   "seed": 1013,
+   "controller": "fly_no_giant_fiber",
+   "tics": 381,
+   "survival_s": 10.8857,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.1496,
+   "switches_per_s": 1.0105,
+   "events": 9,
+   "already_moving": 3,
+   "no_response": 3,
+   "reaction_s": [
+    0.0286,
+    0.2286,
+    0.2286
+   ],
+   "away": [
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2571,
+    0.2571,
+    0.0
+   ],
+   "frame_hash": "9a5b8b9cc8ab1773041e136ffb7d1562895715894c0cf569487be614dde20ccb"
+  }
+ ],
+ "neural": {
+  "fly/1001": {
+   "spikes": {
+    "LC4_left": 950,
+    "LC4_right": 5100,
+    "LPLC2_left": 1786,
+    "LPLC2_right": 10246,
+    "DNa01_left": 14,
+    "DNa01_right": 1,
+    "DNa02_left": 23,
+    "DNa02_right": 1,
+    "DNp01_left": 196,
+    "DNp01_right": 318
+   },
+   "mean_active_per_tic": 61.5
+  },
+  "fly/1002": {
+   "spikes": {
+    "LC4_left": 5281,
+    "LC4_right": 12602,
+    "LPLC2_left": 10546,
+    "LPLC2_right": 25235,
+    "DNa01_left": 47,
+    "DNa01_right": 5,
+    "DNa02_left": 50,
+    "DNa02_right": 6,
+    "DNp01_left": 362,
+    "DNp01_right": 576
+   },
+   "mean_active_per_tic": 141.2
+  },
+  "fly/1003": {
+   "spikes": {
+    "LC4_left": 4873,
+    "LC4_right": 3636,
+    "LPLC2_left": 9869,
+    "LPLC2_right": 7630,
+    "DNa01_left": 11,
+    "DNa01_right": 20,
+    "DNa02_left": 12,
+    "DNa02_right": 8,
+    "DNp01_left": 217,
+    "DNp01_right": 280
+   },
+   "mean_active_per_tic": 108.8
+  },
+  "fly/1004": {
+   "spikes": {
+    "LC4_left": 1869,
+    "LC4_right": 1762,
+    "LPLC2_left": 3862,
+    "LPLC2_right": 3396,
+    "DNa01_left": 1,
+    "DNa01_right": 3,
+    "DNa02_left": 1,
+    "DNa02_right": 3,
+    "DNp01_left": 72,
+    "DNp01_right": 102
+   },
+   "mean_active_per_tic": 106.4
+  },
+  "fly/1005": {
+   "spikes": {
+    "LC4_left": 6937,
+    "LC4_right": 13968,
+    "LPLC2_left": 13859,
+    "LPLC2_right": 28757,
+    "DNa01_left": 46,
+    "DNa01_right": 17,
+    "DNa02_left": 59,
+    "DNa02_right": 11,
+    "DNp01_left": 532,
+    "DNp01_right": 786
+   },
+   "mean_active_per_tic": 131.8
+  },
+  "fly/1006": {
+   "spikes": {
+    "LC4_left": 6229,
+    "LC4_right": 4589,
+    "LPLC2_left": 12274,
+    "LPLC2_right": 9694,
+    "DNa01_left": 11,
+    "DNa01_right": 18,
+    "DNa02_left": 16,
+    "DNa02_right": 14,
+    "DNp01_left": 269,
+    "DNp01_right": 340
+   },
+   "mean_active_per_tic": 120.9
+  },
+  "fly/1009": {
+   "spikes": {
+    "LC4_left": 1601,
+    "LC4_right": 6342,
+    "LPLC2_left": 3139,
+    "LPLC2_right": 13326,
+    "DNa01_left": 27,
+    "DNa01_right": 3,
+    "DNa02_left": 38,
+    "DNa02_right": 1,
+    "DNp01_left": 193,
+    "DNp01_right": 318
+   },
+   "mean_active_per_tic": 110.5
+  },
+  "fly/1011": {
+   "spikes": {
+    "LC4_left": 2707,
+    "LC4_right": 1391,
+    "LPLC2_left": 5509,
+    "LPLC2_right": 2874,
+    "DNa01_left": 1,
+    "DNa01_right": 2,
+    "DNa02_left": 1,
+    "DNa02_right": 4,
+    "DNp01_left": 80,
+    "DNp01_right": 108
+   },
+   "mean_active_per_tic": 88.8
+  },
+  "fly/1012": {
+   "spikes": {
+    "LC4_left": 613,
+    "LC4_right": 3659,
+    "LPLC2_left": 1300,
+    "LPLC2_right": 7581,
+    "DNa01_left": 14,
+    "DNa01_right": 0,
+    "DNa02_left": 8,
+    "DNa02_right": 0,
+    "DNp01_left": 93,
+    "DNp01_right": 166
+   },
+   "mean_active_per_tic": 79.2
+  },
+  "fly/1013": {
+   "spikes": {
+    "LC4_left": 1626,
+    "LC4_right": 2064,
+    "LPLC2_left": 3266,
+    "LPLC2_right": 4344,
+    "DNa01_left": 6,
+    "DNa01_right": 1,
+    "DNa02_left": 6,
+    "DNa02_right": 1,
+    "DNp01_left": 77,
+    "DNp01_right": 100
+   },
+   "mean_active_per_tic": 91.7
+  },
+  "fly_shuffled/1001": {
+   "spikes": {
+    "LC4_left": 906,
+    "LC4_right": 5885,
+    "LPLC2_left": 1694,
+    "LPLC2_right": 12155,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 59.9
+  },
+  "fly_shuffled/1002": {
+   "spikes": {
+    "LC4_left": 662,
+    "LC4_right": 7285,
+    "LPLC2_left": 1220,
+    "LPLC2_right": 14880,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 64.2
+  },
+  "fly_shuffled/1003": {
+   "spikes": {
+    "LC4_left": 1126,
+    "LC4_right": 1995,
+    "LPLC2_left": 2180,
+    "LPLC2_right": 4127,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 37.7
+  },
+  "fly_shuffled/1004": {
+   "spikes": {
+    "LC4_left": 1801,
+    "LC4_right": 2136,
+    "LPLC2_left": 3671,
+    "LPLC2_right": 4075,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 61.8
+  },
+  "fly_shuffled/1005": {
+   "spikes": {
+    "LC4_left": 2944,
+    "LC4_right": 5165,
+    "LPLC2_left": 6055,
+    "LPLC2_right": 10702,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 64.7
+  },
+  "fly_shuffled/1006": {
+   "spikes": {
+    "LC4_left": 5127,
+    "LC4_right": 800,
+    "LPLC2_left": 10232,
+    "LPLC2_right": 1646,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 63.7
+  },
+  "fly_shuffled/1009": {
+   "spikes": {
+    "LC4_left": 1202,
+    "LC4_right": 2008,
+    "LPLC2_left": 2399,
+    "LPLC2_right": 4030,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 41.1
+  },
+  "fly_shuffled/1011": {
+   "spikes": {
+    "LC4_left": 2277,
+    "LC4_right": 1789,
+    "LPLC2_left": 4689,
+    "LPLC2_right": 3620,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 48.9
+  },
+  "fly_shuffled/1012": {
+   "spikes": {
+    "LC4_left": 2809,
+    "LC4_right": 5760,
+    "LPLC2_left": 5639,
+    "LPLC2_right": 11842,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 76.0
+  },
+  "fly_shuffled/1013": {
+   "spikes": {
+    "LC4_left": 1658,
+    "LC4_right": 2026,
+    "LPLC2_left": 3344,
+    "LPLC2_right": 4286,
+    "DNa01_left": 0,
+    "DNa01_right": 0,
+    "DNa02_left": 0,
+    "DNa02_right": 0,
+    "DNp01_left": 0,
+    "DNp01_right": 0
+   },
+   "mean_active_per_tic": 50.3
+  },
+  "fly_no_giant_fiber/1001": {
+   "spikes": {
+    "LC4_left": 823,
+    "LC4_right": 5870,
+    "LPLC2_left": 1559,
+    "LPLC2_right": 11868,
+    "DNa01_left": 15,
+    "DNa01_right": 1,
+    "DNa02_left": 23,
+    "DNa02_right": 1,
+    "DNp01_left": 194,
+    "DNp01_right": 310
+   },
+   "mean_active_per_tic": 64.1
+  },
+  "fly_no_giant_fiber/1002": {
+   "spikes": {
+    "LC4_left": 6379,
+    "LC4_right": 12629,
+    "LPLC2_left": 12951,
+    "LPLC2_right": 25398,
+    "DNa01_left": 35,
+    "DNa01_right": 3,
+    "DNa02_left": 51,
+    "DNa02_right": 5,
+    "DNp01_left": 371,
+    "DNp01_right": 544
+   },
+   "mean_active_per_tic": 143.6
+  },
+  "fly_no_giant_fiber/1003": {
+   "spikes": {
+    "LC4_left": 1818,
+    "LC4_right": 3983,
+    "LPLC2_left": 3776,
+    "LPLC2_right": 8078,
+    "DNa01_left": 17,
+    "DNa01_right": 1,
+    "DNa02_left": 24,
+    "DNa02_right": 0,
+    "DNp01_left": 133,
+    "DNp01_right": 207
+   },
+   "mean_active_per_tic": 74.2
+  },
+  "fly_no_giant_fiber/1004": {
+   "spikes": {
+    "LC4_left": 1869,
+    "LC4_right": 1762,
+    "LPLC2_left": 3862,
+    "LPLC2_right": 3396,
+    "DNa01_left": 1,
+    "DNa01_right": 2,
+    "DNa02_left": 2,
+    "DNa02_right": 4,
+    "DNp01_left": 73,
+    "DNp01_right": 101
+   },
+   "mean_active_per_tic": 106.3
+  },
+  "fly_no_giant_fiber/1005": {
+   "spikes": {
+    "LC4_left": 2615,
+    "LC4_right": 2421,
+    "LPLC2_left": 5352,
+    "LPLC2_right": 5009,
+    "DNa01_left": 7,
+    "DNa01_right": 11,
+    "DNa02_left": 12,
+    "DNa02_right": 6,
+    "DNp01_left": 139,
+    "DNp01_right": 189
+   },
+   "mean_active_per_tic": 89.7
+  },
+  "fly_no_giant_fiber/1006": {
+   "spikes": {
+    "LC4_left": 8866,
+    "LC4_right": 13298,
+    "LPLC2_left": 17387,
+    "LPLC2_right": 27756,
+    "DNa01_left": 51,
+    "DNa01_right": 32,
+    "DNa02_left": 61,
+    "DNa02_right": 26,
+    "DNp01_left": 545,
+    "DNp01_right": 796
+   },
+   "mean_active_per_tic": 135.1
+  },
+  "fly_no_giant_fiber/1009": {
+   "spikes": {
+    "LC4_left": 1466,
+    "LC4_right": 6405,
+    "LPLC2_left": 2882,
+    "LPLC2_right": 13590,
+    "DNa01_left": 32,
+    "DNa01_right": 2,
+    "DNa02_left": 37,
+    "DNa02_right": 2,
+    "DNp01_left": 195,
+    "DNp01_right": 332
+   },
+   "mean_active_per_tic": 104.6
+  },
+  "fly_no_giant_fiber/1011": {
+   "spikes": {
+    "LC4_left": 2335,
+    "LC4_right": 1878,
+    "LPLC2_left": 4794,
+    "LPLC2_right": 3757,
+    "DNa01_left": 1,
+    "DNa01_right": 1,
+    "DNa02_left": 2,
+    "DNa02_right": 2,
+    "DNp01_left": 76,
+    "DNp01_right": 99
+   },
+   "mean_active_per_tic": 87.6
+  },
+  "fly_no_giant_fiber/1012": {
+   "spikes": {
+    "LC4_left": 490,
+    "LC4_right": 3863,
+    "LPLC2_left": 1025,
+    "LPLC2_right": 8044,
+    "DNa01_left": 17,
+    "DNa01_right": 0,
+    "DNa02_left": 9,
+    "DNa02_right": 0,
+    "DNp01_left": 94,
+    "DNp01_right": 166
+   },
+   "mean_active_per_tic": 81.2
+  },
+  "fly_no_giant_fiber/1013": {
+   "spikes": {
+    "LC4_left": 10265,
+    "LC4_right": 2717,
+    "LPLC2_left": 20733,
+    "LPLC2_right": 5642,
+    "DNa01_left": 0,
+    "DNa01_right": 43,
+    "DNa02_left": 2,
+    "DNa02_right": 19,
+    "DNp01_left": 308,
+    "DNp01_right": 328
+   },
+   "mean_active_per_tic": 116.0
+  }
+ },
+ "baselines": {
+  "idle": {
+   "episodes": 10,
+   "survival_s_q": [
+    4.1286,
+    4.2857,
+    5.7357
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "switches_per_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "reaction_s_q": null,
+   "reactions_measured": 0,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": null,
+   "events": 31,
+   "already_moving": 0,
+   "no_response": 31,
+   "reached_cap": 0
+  },
+  "constant": {
+   "episodes": 10,
+   "survival_s_q": [
+    4.0857,
+    4.6143,
+    6.0214
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "switches_per_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "reaction_s_q": null,
+   "reactions_measured": 0,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": null,
+   "events": 26,
+   "already_moving": 26,
+   "no_response": 0,
+   "reached_cap": 0
+  },
+  "random": {
+   "episodes": 10,
+   "survival_s_q": [
+    4.6072,
+    6.3857,
+    9.2286
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    0.6397,
+    0.67,
+    0.7242
+   ],
+   "switches_per_s_q": [
+    5.6959,
+    5.9808,
+    6.3262
+   ],
+   "reaction_s_q": [
+    0.0,
+    0.0571,
+    0.0857
+   ],
+   "reactions_measured": 19,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.0857
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": 0.421,
+   "events": 58,
+   "already_moving": 39,
+   "no_response": 0,
+   "reached_cap": 0
+  },
+  "reflex": {
+   "episodes": 10,
+   "survival_s_q": [
+    5.3715,
+    7.5572,
+    10.7072
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    0.2168,
+    0.2354,
+    0.274
+   ],
+   "switches_per_s_q": [
+    1.1256,
+    1.2086,
+    1.5334
+   ],
+   "reaction_s_q": [
+    0.0,
+    0.0,
+    0.2072
+   ],
+   "reactions_measured": 42,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.2072
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": 0.881,
+   "events": 78,
+   "already_moving": 29,
+   "no_response": 7,
+   "reached_cap": 0
+  },
+  "scripted_v1": {
+   "episodes": 10,
+   "survival_s_q": [
+    4.0857,
+    4.6143,
+    6.0214
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "switches_per_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "reaction_s_q": null,
+   "reactions_measured": 0,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": null,
+   "events": 26,
+   "already_moving": 26,
+   "no_response": 0,
+   "reached_cap": 0
+  },
+  "scripted": {
+   "episodes": 10,
+   "survival_s_q": [
+    9.2428,
+    11.2857,
+    12.6357
+   ],
+   "hits_q": [
+    1.0,
+    1.5,
+    2.0
+   ],
+   "move_fraction_q": [
+    0.1705,
+    0.1889,
+    0.221
+   ],
+   "switches_per_s_q": [
+    0.6966,
+    0.7976,
+    0.9451
+   ],
+   "reaction_s_q": [
+    0.1429,
+    0.5714,
+    0.8571
+   ],
+   "reactions_measured": 35,
+   "eye_delay_s_q": [
+    0.0,
+    0.0,
+    0.1429
+   ],
+   "damage_q": [
+    105.0,
+    126.0,
+    141.75
+   ],
+   "away_fraction": 0.571,
+   "events": 96,
+   "already_moving": 28,
+   "no_response": 33,
+   "reached_cap": 0
+  }
+ },
+ "runtime_s": 754
+}

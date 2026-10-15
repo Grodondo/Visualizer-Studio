@@ -21,3 +21,9 @@ assets/data/
 
 # Browser-automation scratch output
 .playwright-mcp/
+
+# Derived but large (6.5 MB), regenerated in seconds by: uv run python -m compute.punch_reaction
+assets/punch_reaction/sources.npz
+
+# Written by the ViZDoom engine on first run (local key bindings and settings)
+_vizdoom.ini

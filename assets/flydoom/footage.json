@@ -1,0 +1,18 @@
+{
+ "controller": "reflex",
+ "rule": "test seeds in order until >= 40 s",
+ "seeds": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005
+ ],
+ "clips": [
+  "clip_reflex_1001.json",
+  "clip_reflex_1002.json",
+  "clip_reflex_1003.json",
+  "clip_reflex_1004.json",
+  "clip_reflex_1005.json"
+ ]
+}

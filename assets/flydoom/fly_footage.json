@@ -1,0 +1,18 @@
+{
+ "rule": "fly test episodes in seed order until >= 40 s",
+ "seeds": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005
+ ],
+ "clips": [
+  "fly_clip_1001.json",
+  "fly_clip_1002.json",
+  "fly_clip_1003.json",
+  "fly_clip_1004.json",
+  "fly_clip_1005.json"
+ ],
+ "gain": 2.0
+}

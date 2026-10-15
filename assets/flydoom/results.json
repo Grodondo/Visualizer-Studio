@@ -1,0 +1,2007 @@
+{
+ "scenario": "take_cover",
+ "vizdoom": "1.3.1",
+ "python": "3.11.9",
+ "platform": "Windows-10-10.0.26200-SP0",
+ "episode_cap_s": 60.0,
+ "test_seeds": [
+  1001,
+  1002,
+  1003,
+  1004,
+  1005,
+  1006,
+  1009,
+  1011,
+  1012,
+  1013
+ ],
+ "eye": {
+  "bright_luminance": 150.0
+ },
+ "metrics": {
+  "event_dps": 20.0,
+  "reaction_window_s": 1.0
+ },
+ "reflex_calibration": {
+  "grid": {
+   "10.0": 11.714,
+   "20.0": 16.514,
+   "40.0": 7.114,
+   "80.0": 6.8
+  },
+  "chosen": 20.0,
+  "seeds": [
+   9001,
+   9005,
+   9008,
+   9010,
+   9014
+  ]
+ },
+ "scripted_calibration": {
+  "grid": {
+   "6.0": 8.657,
+   "25.0": 8.629,
+   "100.0": 9.057,
+   "400.0": 13.0
+  },
+  "chosen": 400.0,
+  "seeds": [
+   9001,
+   9005,
+   9008,
+   9010,
+   9014
+  ]
+ },
+ "distinct_episodes": {
+  "idle": 10,
+  "constant": 10,
+  "random": 10,
+  "reflex": 10,
+  "scripted_v1": 10,
+  "scripted": 10
+ },
+ "reproducibility": {
+  "episodes_run_twice": 60,
+  "mismatches": []
+ },
+ "controllers": {
+  "idle": {
+   "uses": "nothing",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.1286,
+     4.2857,
+     5.7357
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "switches_per_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reaction_s_q": null,
+    "reactions_measured": 0,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": null,
+    "events": 31,
+    "already_moving": 0,
+    "no_response": 31,
+    "reached_cap": 0
+   }
+  },
+  "constant": {
+   "uses": "nothing",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.0857,
+     4.6143,
+     6.0214
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "switches_per_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reaction_s_q": null,
+    "reactions_measured": 0,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": null,
+    "events": 26,
+    "already_moving": 26,
+    "no_response": 0,
+    "reached_cap": 0
+   }
+  },
+  "random": {
+   "uses": "nothing (its own random numbers)",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.6072,
+     6.3857,
+     9.2286
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.6397,
+     0.67,
+     0.7242
+    ],
+    "switches_per_s_q": [
+     5.6959,
+     5.9808,
+     6.3262
+    ],
+    "reaction_s_q": [
+     0.0,
+     0.0571,
+     0.0857
+    ],
+    "reactions_measured": 19,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.0857
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": 0.421,
+    "events": 58,
+    "already_moving": 39,
+    "no_response": 0,
+    "reached_cap": 0
+   }
+  },
+  "reflex": {
+   "uses": "the looming eye's 4 numbers",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     5.3715,
+     7.5572,
+     10.7072
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.2168,
+     0.2354,
+     0.274
+    ],
+    "switches_per_s_q": [
+     1.1256,
+     1.2086,
+     1.5334
+    ],
+    "reaction_s_q": [
+     0.0,
+     0.0,
+     0.2072
+    ],
+    "reactions_measured": 42,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.2072
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": 0.881,
+    "events": 78,
+    "already_moving": 29,
+    "no_response": 7,
+    "reached_cap": 0
+   }
+  },
+  "scripted_v1": {
+   "uses": "every bright blob's position and size",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     4.0857,
+     4.6143,
+     6.0214
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "switches_per_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "reaction_s_q": null,
+    "reactions_measured": 0,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": null,
+    "events": 26,
+    "already_moving": 26,
+    "no_response": 0,
+    "reached_cap": 0
+   }
+  },
+  "scripted": {
+   "uses": "the biggest bright blob's position and growth",
+   "summary": {
+    "episodes": 10,
+    "survival_s_q": [
+     9.2428,
+     11.2857,
+     12.6357
+    ],
+    "hits_q": [
+     1.0,
+     1.5,
+     2.0
+    ],
+    "move_fraction_q": [
+     0.1705,
+     0.1889,
+     0.221
+    ],
+    "switches_per_s_q": [
+     0.6966,
+     0.7976,
+     0.9451
+    ],
+    "reaction_s_q": [
+     0.1429,
+     0.5714,
+     0.8571
+    ],
+    "reactions_measured": 35,
+    "eye_delay_s_q": [
+     0.0,
+     0.0,
+     0.1429
+    ],
+    "damage_q": [
+     105.0,
+     126.0,
+     141.75
+    ],
+    "away_fraction": 0.571,
+    "events": 96,
+    "already_moving": 28,
+    "no_response": 33,
+    "reached_cap": 0
+   }
+  }
+ },
+ "episodes": [
+  {
+   "seed": 1001,
+   "controller": "idle",
+   "tics": 214,
+   "survival_s": 6.1143,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 6,
+   "already_moving": 0,
+   "no_response": 6,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.1429,
+    0.0,
+    0.0,
+    0.1714
+   ],
+   "frame_hash": "95421dc36480719fd6f72456c07e1bd59a6baf42faff6bafa03bd37b7175d7c8"
+  },
+  {
+   "seed": 1002,
+   "controller": "idle",
+   "tics": 206,
+   "survival_s": 5.8857,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 0,
+   "no_response": 4,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9143,
+    0.0,
+    0.3143
+   ],
+   "frame_hash": "1f8e0897d4a49c5a48508a634586b3314da5acd06115fb2572868a167b14627c"
+  },
+  {
+   "seed": 1003,
+   "controller": "idle",
+   "tics": 149,
+   "survival_s": 4.2571,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "6c204334b3feb5b190d690dfbe57dba935187edeeab3b7e340445811970e2127"
+  },
+  {
+   "seed": 1004,
+   "controller": "idle",
+   "tics": 111,
+   "survival_s": 3.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "76a7cba51489f101df1b2b22c0bb28b6a2237d42eb3007dec5ca122dec463632"
+  },
+  {
+   "seed": 1005,
+   "controller": "idle",
+   "tics": 215,
+   "survival_s": 6.1429,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "01abb4c268d0635117ead8f8c9b8ab756e6973afef73ce99706187343fe44952"
+  },
+  {
+   "seed": 1006,
+   "controller": "idle",
+   "tics": 149,
+   "survival_s": 4.2571,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "790488127413ad014ae1d2555e23dc98781ce501019ec3d56abb83695e8bd603"
+  },
+  {
+   "seed": 1009,
+   "controller": "idle",
+   "tics": 143,
+   "survival_s": 4.0857,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "26cd134bb69cf7ba3ee7677432d976de918030c31eabf8aac4951f65f67416e6"
+  },
+  {
+   "seed": 1011,
+   "controller": "idle",
+   "tics": 151,
+   "survival_s": 4.3143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143
+   ],
+   "frame_hash": "c6723bec1a780d4c95d5298724b30fda85dce040108e2da498af7c76adb0b819"
+  },
+  {
+   "seed": 1012,
+   "controller": "idle",
+   "tics": 185,
+   "survival_s": 5.2857,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 0,
+   "no_response": 3,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "abb7d696e9003cd0549bbef9f29332a027648c530bbcc71fef26731151e2b172"
+  },
+  {
+   "seed": 1013,
+   "controller": "idle",
+   "tics": 134,
+   "survival_s": 3.8286,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 0,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "e24c3546887b9295fbf5abf229f49b0dbb0ae03456cc430e7a3b0497d67b801a"
+  },
+  {
+   "seed": 1001,
+   "controller": "constant",
+   "tics": 174,
+   "survival_s": 4.9714,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 4,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9429,
+    0.8571,
+    0.0
+   ],
+   "frame_hash": "299563276cdd2ea47024e6e8d258fd521ee06101a859775fc6cf91e1b9eb6a6d"
+  },
+  {
+   "seed": 1002,
+   "controller": "constant",
+   "tics": 223,
+   "survival_s": 6.3714,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "4ce58d16272e91fd8adfe8e2f7504575b256b624f7e432874d9b7662a350f995"
+  },
+  {
+   "seed": 1003,
+   "controller": "constant",
+   "tics": 165,
+   "survival_s": 4.7143,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0
+   ],
+   "frame_hash": "e3fa3728d2543f57057149d52348139a7e91864f2d0bab40f1ec28fce89c128d"
+  },
+  {
+   "seed": 1004,
+   "controller": "constant",
+   "tics": 107,
+   "survival_s": 3.0571,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "44b4812dec65571cce9496a0b85940d43efc79ca23ed52cd419b9a70b111fd71"
+  },
+  {
+   "seed": 1005,
+   "controller": "constant",
+   "tics": 225,
+   "survival_s": 6.4286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "c9ea185a9edf2206deff0a2bece22306d546eb7a124fecf1655d249dfea4582e"
+  },
+  {
+   "seed": 1006,
+   "controller": "constant",
+   "tics": 142,
+   "survival_s": 4.0571,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "39c72abc40dfbb092a529b42504855bc9fc0568769b1a47fad8590bbf8a58967"
+  },
+  {
+   "seed": 1009,
+   "controller": "constant",
+   "tics": 158,
+   "survival_s": 4.5143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "445e9d61f2866a5001a1f6e8c56a16ce717c91ff325e228a0b0f11b0b7dbbded"
+  },
+  {
+   "seed": 1011,
+   "controller": "constant",
+   "tics": 146,
+   "survival_s": 4.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9143
+   ],
+   "frame_hash": "1ad858883783aac87b8f42b3b9de909074a7cf9905b6eab886ef584c20a94a18"
+  },
+  {
+   "seed": 1012,
+   "controller": "constant",
+   "tics": 252,
+   "survival_s": 7.2,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 4,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0571,
+    0.0
+   ],
+   "frame_hash": "290f6775459e6217d3c05c74bed82ce015055e4a09574202dfb8079bd1c49a9c"
+  },
+  {
+   "seed": 1013,
+   "controller": "constant",
+   "tics": 131,
+   "survival_s": 3.7429,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0
+   ],
+   "frame_hash": "2ca787dff90b4137bb31ee1b99be891aa99a5ae45fc82921e0beca6040889472"
+  },
+  {
+   "seed": 1001,
+   "controller": "random",
+   "tics": 183,
+   "survival_s": 5.2286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.5847,
+   "switches_per_s": 6.3115,
+   "events": 5,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.1143,
+    0.1429,
+    0.0571,
+    0.0
+   ],
+   "away": [
+    false,
+    false,
+    false,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.2,
+    0.0,
+    0.0,
+    0.0857
+   ],
+   "frame_hash": "e58954d95c360881455ca0209e2346b0a8bcc05e3a9b1bde98744fcea2b651f5"
+  },
+  {
+   "seed": 1002,
+   "controller": "random",
+   "tics": 293,
+   "survival_s": 8.3714,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.6553,
+   "switches_per_s": 6.3311,
+   "events": 7,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [
+    0.0857,
+    0.0571,
+    0.0857,
+    0.0
+   ],
+   "away": [
+    false,
+    true,
+    false,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.9714,
+    0.0,
+    0.2571
+   ],
+   "frame_hash": "5c48762f32bc0b2d947d2df186db7447c26736113f784985152ed8cd38127277"
+  },
+  {
+   "seed": 1003,
+   "controller": "random",
+   "tics": 153,
+   "survival_s": 4.3714,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.7124,
+   "switches_per_s": 6.1765,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "f8b27963baeeb69b42dac782e44b2de462d76b130b768a6ed737ad6046d31cad"
+  },
+  {
+   "seed": 1004,
+   "controller": "random",
+   "tics": 154,
+   "survival_s": 4.4,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.6364,
+   "switches_per_s": 5.4545,
+   "events": 3,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [
+    0.0286
+   ],
+   "away": [
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "2393303b03fbd7cb37cf8ad8c19ff96501b6c167f5df2b1ac0ee1dae601a7e60"
+  },
+  {
+   "seed": 1005,
+   "controller": "random",
+   "tics": 363,
+   "survival_s": 10.3714,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.7576,
+   "switches_per_s": 5.7851,
+   "events": 10,
+   "already_moving": 9,
+   "no_response": 0,
+   "reaction_s": [
+    0.0
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.3429,
+    0.0,
+    0.0,
+    0.0,
+    0.3714,
+    0.1429,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "f449d12d69f392f66ec7338b8542bf797dbec30f7eac552073f6857813028e1b"
+  },
+  {
+   "seed": 1006,
+   "controller": "random",
+   "tics": 241,
+   "survival_s": 6.8857,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.6846,
+   "switches_per_s": 6.39,
+   "events": 5,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [
+    0.0571,
+    0.0
+   ],
+   "away": [
+    false,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.3143,
+    0.0,
+    0.0,
+    0.4857
+   ],
+   "frame_hash": "87731798a9639e81e85d08267397df4ef07c65d23bd33c85bbd6d821fe52a004"
+  },
+  {
+   "seed": 1009,
+   "controller": "random",
+   "tics": 152,
+   "survival_s": 4.3429,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.5526,
+   "switches_per_s": 5.7566,
+   "events": 2,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0857
+   ],
+   "away": [
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "9feeb2ac47e0be260cc353bba80bb6dcd9152e3443365fa3e1b0b4e091097f27"
+  },
+  {
+   "seed": 1011,
+   "controller": "random",
+   "tics": 388,
+   "survival_s": 11.0857,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.6495,
+   "switches_per_s": 5.3222,
+   "events": 10,
+   "already_moving": 5,
+   "no_response": 0,
+   "reaction_s": [
+    0.0571,
+    0.0,
+    0.0,
+    0.2571,
+    0.1429
+   ],
+   "away": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.2857,
+    0.0571,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2571
+   ],
+   "frame_hash": "7b05fab0cc2b5be42376c7e00a6a77135508384e5a1af3ca3147ab6aad33c931"
+  },
+  {
+   "seed": 1012,
+   "controller": "random",
+   "tics": 333,
+   "survival_s": 9.5143,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.7357,
+   "switches_per_s": 5.6757,
+   "events": 10,
+   "already_moving": 9,
+   "no_response": 0,
+   "reaction_s": [
+    0.0857
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.2286,
+    0.0,
+    0.0,
+    0.2857,
+    0.2,
+    0.0,
+    0.0571
+   ],
+   "frame_hash": "7ab256027486081618c6429cfa9107e0d002317c421b59a5139103f55e69c840"
+  },
+  {
+   "seed": 1013,
+   "controller": "random",
+   "tics": 206,
+   "survival_s": 5.8857,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.7282,
+   "switches_per_s": 6.7961,
+   "events": 4,
+   "already_moving": 4,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "c988fbf77593b3aed0b2067de396c6845d0e57e8a8344bce30955f261d07757f"
+  },
+  {
+   "seed": 1001,
+   "controller": "reflex",
+   "tics": 176,
+   "survival_s": 5.0286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.267,
+   "switches_per_s": 1.5909,
+   "events": 5,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [
+    0.0,
+    0.0,
+    0.2286
+   ],
+   "away": [
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.8571,
+    0.2286
+   ],
+   "frame_hash": "61c9e986f2fb75ccb580a889a789d2c763b7b5dc789793a62021559c3300f42d"
+  },
+  {
+   "seed": 1002,
+   "controller": "reflex",
+   "tics": 723,
+   "survival_s": 20.6571,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.3015,
+   "switches_per_s": 1.4039,
+   "events": 25,
+   "already_moving": 10,
+   "no_response": 3,
+   "reaction_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.3429,
+    0.0857,
+    0.6571,
+    0.4,
+    0.8571,
+    0.5714,
+    0.2857
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.9143,
+    0.0,
+    0.0,
+    0.1429,
+    0.0857,
+    0.0,
+    0.3429,
+    0.0857,
+    0.3714,
+    0.6571,
+    0.4,
+    0.8571,
+    0.5714,
+    0.2857,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "47ad8ac811b4c179a1db90bd04713509aa0797e9bdf94af3f102e0942ccf1626"
+  },
+  {
+   "seed": 1003,
+   "controller": "reflex",
+   "tics": 304,
+   "survival_s": 8.6857,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.2763,
+   "switches_per_s": 1.1513,
+   "events": 6,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "away": [
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0286,
+    0.0
+   ],
+   "frame_hash": "e55369727e84a55bfadb71386c3f3bc33e0fd2f3d1017c7ad27daf7533b11b83"
+  },
+  {
+   "seed": 1004,
+   "controller": "reflex",
+   "tics": 111,
+   "survival_s": 3.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.2342,
+   "switches_per_s": 1.5766,
+   "events": 3,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [
+    0.0
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "af47adc468f9bf8b9715fe583e2a806029e8710dc3aedb224ce334ba6fb0b358"
+  },
+  {
+   "seed": 1005,
+   "controller": "reflex",
+   "tics": 225,
+   "survival_s": 6.4286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.2178,
+   "switches_per_s": 1.2444,
+   "events": 4,
+   "already_moving": 0,
+   "no_response": 0,
+   "reaction_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0857
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0857
+   ],
+   "frame_hash": "c04ad6852cb9ddc46e0fd3ba066ebba95848a9a493b01d5e184c6755c03220da"
+  },
+  {
+   "seed": 1006,
+   "controller": "reflex",
+   "tics": 371,
+   "survival_s": 10.6,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.3127,
+   "switches_per_s": 1.6981,
+   "events": 11,
+   "already_moving": 3,
+   "no_response": 1,
+   "reaction_s": [
+    0.0,
+    0.6571,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.2857
+   ],
+   "away": [
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.6571,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.7714,
+    0.2857,
+    0.0
+   ],
+   "frame_hash": "80cc127d3036eb65becb7be83a22285a04aeee34ec3ef313f4de80e452632b5c"
+  },
+  {
+   "seed": 1009,
+   "controller": "reflex",
+   "tics": 143,
+   "survival_s": 4.0857,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.1958,
+   "switches_per_s": 0.979,
+   "events": 2,
+   "already_moving": 1,
+   "no_response": 0,
+   "reaction_s": [
+    0.0
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "828addf2b0ced71e9c8a76a7cdb9896c188e914a99364a66acef8a6a47a02108"
+  },
+  {
+   "seed": 1011,
+   "controller": "reflex",
+   "tics": 388,
+   "survival_s": 11.0857,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.2165,
+   "switches_per_s": 1.1727,
+   "events": 10,
+   "already_moving": 3,
+   "no_response": 2,
+   "reaction_s": [
+    0.0,
+    0.7143,
+    0.0,
+    0.0,
+    0.2571
+   ],
+   "away": [
+    true,
+    false,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143,
+    0.0,
+    0.0,
+    0.0,
+    0.8286,
+    0.2571
+   ],
+   "frame_hash": "b3bd526dea6ff079f5020c2ed4f99e401ccd9797854ca098779ee6d8304b73eb"
+  },
+  {
+   "seed": 1012,
+   "controller": "reflex",
+   "tics": 376,
+   "survival_s": 10.7429,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.2367,
+   "switches_per_s": 1.117,
+   "events": 8,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.1429
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.3143,
+    0.1429
+   ],
+   "frame_hash": "fd9b0b2947c630460fa06e26121987151ff0f86f84442359268764f4dac04608"
+  },
+  {
+   "seed": 1013,
+   "controller": "reflex",
+   "tics": 224,
+   "survival_s": 6.4,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.1562,
+   "switches_per_s": 0.7812,
+   "events": 4,
+   "already_moving": 2,
+   "no_response": 1,
+   "reaction_s": [
+    0.0
+   ],
+   "away": [
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "558f46f9a18a22767391b67779f6b95e16b7c85cf3313e2590775e7bbd263a38"
+  },
+  {
+   "seed": 1001,
+   "controller": "scripted_v1",
+   "tics": 174,
+   "survival_s": 4.9714,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 4,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9429,
+    0.8571,
+    0.0
+   ],
+   "frame_hash": "299563276cdd2ea47024e6e8d258fd521ee06101a859775fc6cf91e1b9eb6a6d"
+  },
+  {
+   "seed": 1002,
+   "controller": "scripted_v1",
+   "tics": 223,
+   "survival_s": 6.3714,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "4ce58d16272e91fd8adfe8e2f7504575b256b624f7e432874d9b7662a350f995"
+  },
+  {
+   "seed": 1003,
+   "controller": "scripted_v1",
+   "tics": 165,
+   "survival_s": 4.7143,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0
+   ],
+   "frame_hash": "e3fa3728d2543f57057149d52348139a7e91864f2d0bab40f1ec28fce89c128d"
+  },
+  {
+   "seed": 1004,
+   "controller": "scripted_v1",
+   "tics": 107,
+   "survival_s": 3.0571,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "44b4812dec65571cce9496a0b85940d43efc79ca23ed52cd419b9a70b111fd71"
+  },
+  {
+   "seed": 1005,
+   "controller": "scripted_v1",
+   "tics": 225,
+   "survival_s": 6.4286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "c9ea185a9edf2206deff0a2bece22306d546eb7a124fecf1655d249dfea4582e"
+  },
+  {
+   "seed": 1006,
+   "controller": "scripted_v1",
+   "tics": 142,
+   "survival_s": 4.0571,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.493,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "f464b20169522175174a36649661b9f8da39f330d80fdda920b755330761b0c9"
+  },
+  {
+   "seed": 1009,
+   "controller": "scripted_v1",
+   "tics": 158,
+   "survival_s": 4.5143,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 3,
+   "already_moving": 3,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0
+   ],
+   "frame_hash": "445e9d61f2866a5001a1f6e8c56a16ce717c91ff325e228a0b0f11b0b7dbbded"
+  },
+  {
+   "seed": 1011,
+   "controller": "scripted_v1",
+   "tics": 146,
+   "survival_s": 4.1714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.9143
+   ],
+   "frame_hash": "1ad858883783aac87b8f42b3b9de909074a7cf9905b6eab886ef584c20a94a18"
+  },
+  {
+   "seed": 1012,
+   "controller": "scripted_v1",
+   "tics": 252,
+   "survival_s": 7.2,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 4,
+   "already_moving": 4,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0571,
+    0.0
+   ],
+   "frame_hash": "290f6775459e6217d3c05c74bed82ce015055e4a09574202dfb8079bd1c49a9c"
+  },
+  {
+   "seed": 1013,
+   "controller": "scripted_v1",
+   "tics": 131,
+   "survival_s": 3.7429,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 1.0,
+   "switches_per_s": 0.0,
+   "events": 2,
+   "already_moving": 2,
+   "no_response": 0,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0
+   ],
+   "frame_hash": "2ca787dff90b4137bb31ee1b99be891aa99a5ae45fc82921e0beca6040889472"
+  },
+  {
+   "seed": 1001,
+   "controller": "scripted",
+   "tics": 470,
+   "survival_s": 13.4286,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.183,
+   "switches_per_s": 0.6702,
+   "events": 11,
+   "already_moving": 5,
+   "no_response": 2,
+   "reaction_s": [
+    0.0857,
+    0.3429,
+    0.5714,
+    0.0
+   ],
+   "away": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.1714,
+    0.0,
+    0.8571,
+    0.2,
+    0.0,
+    0.6,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "c500aa1ce75dd04a75c9269586d7d5ca2f5bf6ee7851b6e00a51daa6cb038b3a"
+  },
+  {
+   "seed": 1002,
+   "controller": "scripted",
+   "tics": 451,
+   "survival_s": 12.8857,
+   "died": true,
+   "hits": 3,
+   "damage": 168.0,
+   "move_fraction": 0.2927,
+   "switches_per_s": 0.6984,
+   "events": 10,
+   "already_moving": 3,
+   "no_response": 4,
+   "reaction_s": [
+    0.8571,
+    1.0,
+    0.8571
+   ],
+   "away": [
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.9429,
+    0.0,
+    0.0,
+    0.9143,
+    0.0,
+    0.0286,
+    0.0,
+    0.1429
+   ],
+   "frame_hash": "f46518b90aef6a1c91bc1e1cf53b3e97b125ebd973f4f65582a7f096b1be8db3"
+  },
+  {
+   "seed": 1003,
+   "controller": "scripted",
+   "tics": 303,
+   "survival_s": 8.6571,
+   "died": true,
+   "hits": 1,
+   "damage": 147.0,
+   "move_fraction": 0.1023,
+   "switches_per_s": 0.5776,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 1,
+   "reaction_s": [
+    0.6286,
+    0.6857,
+    0.0571,
+    0.0286
+   ],
+   "away": [
+    false,
+    false,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "4e40745be82ef27c933500989a4290b0f4105540cfe3b6e48c8354cdf1c7d0d3"
+  },
+  {
+   "seed": 1004,
+   "controller": "scripted",
+   "tics": 112,
+   "survival_s": 3.2,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.1071,
+   "switches_per_s": 0.9375,
+   "events": 3,
+   "already_moving": 1,
+   "no_response": 2,
+   "reaction_s": [],
+   "away": [],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "2d043fcda66802ca1469b3ce8a9c994e4633a3339ab29dd4c5301c09b34049af"
+  },
+  {
+   "seed": 1005,
+   "controller": "scripted",
+   "tics": 401,
+   "survival_s": 11.4571,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.1696,
+   "switches_per_s": 0.7855,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 4,
+   "reaction_s": [
+    0.8571
+   ],
+   "away": [
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "c45aca9068cebdee02ed48d8fb6c94e08a572b8e2fc3e4b56f193211f2a00658"
+  },
+  {
+   "seed": 1006,
+   "controller": "scripted",
+   "tics": 389,
+   "survival_s": 11.1143,
+   "died": true,
+   "hits": 2,
+   "damage": 210.0,
+   "move_fraction": 0.2057,
+   "switches_per_s": 0.8098,
+   "events": 14,
+   "already_moving": 6,
+   "no_response": 4,
+   "reaction_s": [
+    0.9714,
+    1.0,
+    0.9143,
+    0.6
+   ],
+   "away": [
+    false,
+    false,
+    false,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.6857,
+    0.0
+   ],
+   "frame_hash": "92c72198de229af258f3796c20ec1b759dce7be0b0cefbed6be9e012d7b1b4de"
+  },
+  {
+   "seed": 1009,
+   "controller": "scripted",
+   "tics": 314,
+   "survival_s": 8.9714,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.2261,
+   "switches_per_s": 1.0032,
+   "events": 6,
+   "already_moving": 1,
+   "no_response": 2,
+   "reaction_s": [
+    0.8,
+    0.1143,
+    0.3714
+   ],
+   "away": [
+    false,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.1429
+   ],
+   "frame_hash": "a009ba0b42215de609a9fa6b7d141021b65b5294abbd0d5c3225755d4c52a275"
+  },
+  {
+   "seed": 1011,
+   "controller": "scripted",
+   "tics": 352,
+   "survival_s": 10.0571,
+   "died": true,
+   "hits": 1,
+   "damage": 126.0,
+   "move_fraction": 0.1733,
+   "switches_per_s": 0.696,
+   "events": 7,
+   "already_moving": 1,
+   "no_response": 3,
+   "reaction_s": [
+    1.0,
+    0.6571,
+    0.9714
+   ],
+   "away": [
+    false,
+    false,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.7143,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "frame_hash": "72340c61ada2a69892ca7a4561f22f0b4415a94110b28455cafa6ed763f9ea49"
+  },
+  {
+   "seed": 1012,
+   "controller": "scripted",
+   "tics": 416,
+   "survival_s": 11.8857,
+   "died": true,
+   "hits": 2,
+   "damage": 105.0,
+   "move_fraction": 0.1947,
+   "switches_per_s": 1.0096,
+   "events": 13,
+   "already_moving": 4,
+   "no_response": 4,
+   "reaction_s": [
+    0.2857,
+    0.1429,
+    0.2857,
+    0.0857,
+    0.1429
+   ],
+   "away": [
+    true,
+    true,
+    false,
+    false,
+    false
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0571,
+    0.3429,
+    0.1429,
+    0.6857,
+    0.6286,
+    0.2571,
+    0.0
+   ],
+   "frame_hash": "75db5cd43d64946b7e8c6de65caf9c811a18a0f32e3f181635ba92e37d63594a"
+  },
+  {
+   "seed": 1013,
+   "controller": "scripted",
+   "tics": 554,
+   "survival_s": 15.8286,
+   "died": true,
+   "hits": 1,
+   "damage": 105.0,
+   "move_fraction": 0.2347,
+   "switches_per_s": 0.9477,
+   "events": 20,
+   "already_moving": 5,
+   "no_response": 7,
+   "reaction_s": [
+    0.9143,
+    0.4,
+    0.4,
+    0.7429,
+    0.1143,
+    0.2857,
+    0.6286,
+    0.1143
+   ],
+   "away": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "eye_delay_s": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4571,
+    0.4571,
+    0.0286,
+    0.0,
+    0.0,
+    0.6286,
+    0.0,
+    0.3429,
+    0.0,
+    0.6571,
+    0.1429,
+    0.0
+   ],
+   "frame_hash": "e94c0e86565d545b11c2720f27e2041cb3d7d2c2b53b7b5342f84a0d85dba024"
+  }
+ ]
+}
